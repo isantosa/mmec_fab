@@ -1,6 +1,6 @@
 # mmec_fab
 
-Starting point for fabrication setup.
+Starting point for fabrication setup for mmec_fab. Archived to encourage development in own repositories.
 
 Scripts to run fabrication sequences needs to be written, and the methods in mmec_fab.RobotClient needs to be adapted to project needs.
 
