@@ -17,7 +17,7 @@ ACCEL_RAMP = 100
 SPEED_OVERRIDE = 100
 TCP_MAX_SPEED = 250
 
-SAFE_JOINT_POSITION = [0, 0, 0, 0, 0, 0]  # six values in degrees
+SAFE_JOINT_POSITION = [0, 0, 0, 0, 90, 0]  # six values in degrees
 
 TIMEOUT_SHORT = 10
 TIMEOUT_LONG = 30
@@ -48,7 +48,7 @@ class RobotClient(compas_rrc.AbbClient):
 
     def __init__(self, ros_port=9090):
         """Sets up a RosClient."""
-        super(RobotClient, self).__init__(RosClient(port=9090))
+        super(RobotClient, self).__init__(RosClient(port=9090), namespace="/")
 
     # __enter__ and __exit__ are called at start and end of with statements
     # example:
@@ -62,10 +62,10 @@ class RobotClient(compas_rrc.AbbClient):
         return self
 
     def __exit__(self, *args):
-        self.close()
-        self.terminate()
+        self.ros.close()
+        self.ros.terminate()
 
-    def pre(self, safe_joint_position=[0, 0, 0, 0, 0, 0]):
+    def pre(self, safe_joint_position=[0, 0, 0, 0, 90, 0]):
         self.check_connection_controller()
         # Open gripper
         self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
@@ -84,7 +84,7 @@ class RobotClient(compas_rrc.AbbClient):
             MoveToJoints(SAFE_JOINT_POSITION, self.EXTERNAL_AXES_DUMMY, 150, 50)
         )
 
-    def post(self, safe_joint_position=[0, 0, 0, 0, 0, 0]):
+    def post(self, safe_joint_position=[0, 0, 0, 0, 90, 0]):
         self.send_and_wait(
             MoveToJoints(SAFE_JOINT_POSITION, self.EXTERNAL_AXES_DUMMY, 150, 50)
         )
@@ -125,25 +125,50 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
 
         # Move to pickup frame
-        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone))
+        self.send(MoveToFrame(place_frame, precise_speed, precise_zone))
 
         # Release gripper
         self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
 
+        # Move to just above place frame
+        self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
+
+
+    ####
+    def point_go(
+        self,
+        pick_framelike,
+        place_framelike,
+        travel_speed=250,
+        travel_zone=Zone.Z10,
+        precise_speed=50,
+        precise_zone=Zone.FINE,
+        offset_distance=150,
+    ):
+        pick_frame = ensure_frame(pick_framelike)
+
+        # PICK
+
+        # Move to pickup frame
+        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone))
+
+    ####
+    
+
         # Return to just above pickup frame
         # This command is sent with send_and_wait, to make the client send one
         # pick and place instruction at a time.
-        self.send_and_wait(MoveToFrame(above_place_frame, precise_speed, precise_zone))
+        # self.send_and_wait(MoveToFrame(above_place_frame, precise_speed, precise_zone))
 
-    def roll(self, framelike_list, offset_distance, speed=50, zone=1):
-        frame_list = [ensure_frame(framelike) for framelike in framelike_list]
+    # def roll(self, framelike_list, offset_distance, speed=50, zone=1):
+    #     frame_list = [ensure_frame(framelike) for framelike in framelike_list]
 
-        for frame in frame_list:
-            above_frame = offset_frame(frame, -offset_distance)
+    #     for frame in frame_list:
+    #         above_frame = offset_frame(frame, -offset_distance)
 
-            self.send(MoveToFrame(above_frame, speed, zone))
-            self.send(MoveToFrame(frame, speed, zone))
-            self.send(MoveToFrame(above_frame, speed, zone))
+    #         self.send(MoveToFrame(above_frame, speed, zone))
+    #         self.send(MoveToFrame(frame, speed, zone))
+    #         self.send(MoveToFrame(above_frame, speed, zone))
 
     def confirm_start(self):
         """Stop program and prompt user to press play on pendant to resume."""
