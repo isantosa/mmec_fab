@@ -21,7 +21,7 @@ def run_pick_place(file_path):
                 place,
                 travel_speed=250,
                 travel_zone=Zone.Z10,
-                precise_speed=50,
+                precise_speed=100,
                 precise_zone=Zone.FINE,
                 offset_distance=150,
             )
