@@ -46,7 +46,7 @@ class RobotClient(compas_rrc.AbbClient):
 
     def __init__(self, ros_port=9090):
         """Sets up a RosClient."""
-        super(RobotClient, self).__init__(RosClient(port=9090))
+        super(RobotClient, self).__init__(RosClient(port=9090), namespace="/")
 
     # __enter__ and __exit__ are called at start and end of with statements
     # example:
@@ -60,8 +60,8 @@ class RobotClient(compas_rrc.AbbClient):
         return self
 
     def __exit__(self, *args):
-        self.close()
-        self.terminate()
+        self.ros.close()
+        self.ros.terminate()
 
     def pre(self, safe_joint_position=[0, 0, 0, 0, 0, 0]):
         self.check_connection_controller()
