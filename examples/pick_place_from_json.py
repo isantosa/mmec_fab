@@ -57,7 +57,6 @@ if __name__ == "__main__":
         filepath = sys.argv[1]
     else:
         print("No input file specified, using example file pp_frames.json")
-        #filepath = os.path.abspath(os.path.join(__file__, "..", "pp_frames.json"))
         filepath = os.path.abspath(os.path.join(__file__, "..", "pp_frames.json"))
 
     run_pick_place(filepath)
