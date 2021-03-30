@@ -3,7 +3,7 @@ from __future__ import division
 from __future__ import print_function
 
 import compas_rrc
-from compas_rrc import MoveToFrame, MoveToJoints, Zone
+from compas_rrc import MoveToFrame, MoveToJoints, Zone, Motion
 from compas_fab.backends import RosClient
 
 from mmec_fab import offset_frame
@@ -12,10 +12,10 @@ from mmec_fab import ensure_frame
 GRIPPER_PIN = "doUnitC1Out1"
 
 # Speed values
-ACCEL = 100
-ACCEL_RAMP = 100
-SPEED_OVERRIDE = 100
-TCP_MAX_SPEED = 250
+ACCEL = 100  # %
+ACCEL_RAMP = 100  # %
+SPEED_OVERRIDE = 100  # %
+TCP_MAX_SPEED = 250  # mm/s
 
 SAFE_JOINT_POSITION = [0, 0, 0, 0, 90, 0]  # six values in degrees
 
@@ -68,7 +68,7 @@ class RobotClient(compas_rrc.AbbClient):
     def pre(self, safe_joint_position=[0, 0, 0, 0, 90, 0]):
         self.check_connection_controller()
         # Open gripper
-        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
+        self.send(compas_rrc.SetDigital(GRIPPER_PIN, False))
 
         # Set speed and accceleration
         self.send(compas_rrc.SetAcceleration(ACCEL, ACCEL_RAMP))
@@ -98,6 +98,8 @@ class RobotClient(compas_rrc.AbbClient):
         precise_speed=50,
         precise_zone=Zone.FINE,
         offset_distance=150,
+        motion_type_travel=Motion.JOINT,
+        motion_type_precise=Motion.LINEAR,
     ):
         pick_frame = ensure_frame(pick_framelike)
         place_frame = ensure_frame(place_framelike)
@@ -117,7 +119,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetDigital(GRIPPER_PIN, 1))
 
         # Return to just above pickup frame
-        self.send(MoveToFrame(above_pick_frame, precise_speed, precise_zone))
+        self.send(MoveToFrame(above_pick_frame, precise_speed, precise_zone,motion_type=motion_type_precise))
 
         # PLACE
 
@@ -135,6 +137,66 @@ class RobotClient(compas_rrc.AbbClient):
 
 
     ####
+    def slice_making(
+        self,
+        pick_framelike,
+        place_framelike,
+        travel_speed=250,
+        travel_zone=Zone.Z10,
+        precise_speed=50,
+        precise_zone=Zone.FINE,
+        offset_distance=150,
+        motion_type_travel=Motion.JOINT,
+        motion_type_precise=Motion.LINEAR,
+    ):
+        pick_frame = ensure_frame(pick_framelike)
+        place_frame = ensure_frame(place_framelike)
+
+        above_pick_frame = offset_frame(pick_frame, -offset_distance)
+        above_place_frame = offset_frame(place_frame, -offset_distance)
+
+        #### MOVEMENT AT THE CUTTING STATION
+
+        # Move to just above pickup frame
+        self.send(MoveToFrame(above_pick_frame, travel_speed, travel_zone))
+
+        # Move to pickup frame
+        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone))
+
+        # Activate gripper
+        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 1))
+
+        # Slide to measure wood before cutting
+        self.send(MoveToFrame(measure_frame, precise_speed, precise_zone,motion_type=motion_type_precise))
+
+        ## NEED TO ADD RESUME FUNCTION HERE ##
+
+        #### MOVE TO SAFE POINT
+        self.send(MoveToFrame(safe_frame, travel_speed, travel_zone))
+
+        #### MOVEMENT AT THE SLICE MAKING STATION
+
+        # Move to just above place frame
+        self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
+
+        # Move to place frame
+        self.send(MoveToFrame(place_frame, precise_speed, precise_zone))
+
+        ## NEED TO ADD RESUME FUNCTION HERE ##
+
+        # Release gripper
+        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
+
+        # Move to just above place frame
+        self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
+
+        
+
+
+    ####
+
+
+
     def point_go(
         self,
         pick_framelike,
@@ -144,21 +206,16 @@ class RobotClient(compas_rrc.AbbClient):
         precise_speed=50,
         precise_zone=Zone.FINE,
         offset_distance=150,
+        motion_type_travel=Motion.JOINT,
+        motion_type_precise=Motion.LINEAR,
     ):
         pick_frame = ensure_frame(pick_framelike)
 
         # PICK
 
         # Move to pickup frame
-        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone))
+        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone,motion_type_precise))
 
-    ####
-    
-
-        # Return to just above pickup frame
-        # This command is sent with send_and_wait, to make the client send one
-        # pick and place instruction at a time.
-        # self.send_and_wait(MoveToFrame(above_place_frame, precise_speed, precise_zone))
 
     # def roll(self, framelike_list, offset_distance, speed=50, zone=1):
     #     frame_list = [ensure_frame(framelike) for framelike in framelike_list]
