@@ -190,7 +190,10 @@ class RobotClient(compas_rrc.AbbClient):
         # Move to just above place frame
         self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
 
-        
+        # RETURN TO SAVE POINT
+        # This command is sent with send_and_wait, to make the client send one
+        # pick and place instruction at a time.
+        self.send_and_wait(MoveToFrame(safe_frame, travel_speed, travel_zone))
 
 
     ####
