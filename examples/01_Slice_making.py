@@ -33,9 +33,9 @@ if __name__ == "__main__":
     import sys
 
     if len(sys.argv) > 1:
-        filepath = "pp_frames.json"
+        filepath = "slice_making_01.json"
     else:
         print("No input file specified, using example file pp_frames.json")
-        filepath = os.path.abspath(os.path.join(__file__, "..", "frames.json"))
+        filepath = os.path.abspath(os.path.join(__file__, "..", "slice_making_01.json"))
 
     run_slice_making(filepath)
