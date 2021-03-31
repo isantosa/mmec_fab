@@ -15,9 +15,11 @@ def run_slice_making(file_path):
     with RobotClient() as client:
         client.pre()
 
-        for pick, place in zip(data["pick_frames"], data["place_frames"]):
+        for pick, measure, safe, place in zip(data["pick_frames"], data["measure_frames"], data["safe_frames"], data["place_frames"]):
             client.slice_making(
                 pick,
+                measure,
+                safe,
                 place,
                 travel_speed=250,
                 travel_zone=Zone.Z10,
