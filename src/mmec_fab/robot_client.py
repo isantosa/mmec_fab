@@ -104,6 +104,7 @@ class RobotClient(compas_rrc.AbbClient):
         pick_frame = ensure_frame(pick_framelike)
         place_frame = ensure_frame(place_framelike)
 
+
         above_pick_frame = offset_frame(pick_frame, -offset_distance)
         above_place_frame = offset_frame(place_frame, -offset_distance)
 
@@ -140,6 +141,8 @@ class RobotClient(compas_rrc.AbbClient):
     def slice_making(
         self,
         pick_framelike,
+        measure_framelike,
+        safe_framelike,
         place_framelike,
         travel_speed=250,
         travel_zone=Zone.Z10,
@@ -150,10 +153,17 @@ class RobotClient(compas_rrc.AbbClient):
         motion_type_precise=Motion.LINEAR,
     ):
         pick_frame = ensure_frame(pick_framelike)
+        measure_frame = ensure_frame(measure_framelike)
+        safe_frame = ensure_frame(safe_framelike)
         place_frame = ensure_frame(place_framelike)
 
         above_pick_frame = offset_frame(pick_frame, -offset_distance)
+        above_measure_frame = offset_frame(measure_frame, -offset_distance)
         above_place_frame = offset_frame(place_frame, -offset_distance)
+
+
+        #### MOVE TO SAFE POINT
+        self.send(MoveToFrame(safe_frame, travel_speed, travel_zone))
 
         #### MOVEMENT AT THE CUTTING STATION
 
@@ -168,6 +178,9 @@ class RobotClient(compas_rrc.AbbClient):
 
         # Slide to measure wood before cutting
         self.send(MoveToFrame(measure_frame, precise_speed, precise_zone,motion_type=motion_type_precise))
+
+        # Move to just above measure frame
+        self.send(MoveToFrame(above_measure_frame, travel_speed, travel_zone))
 
         ## NEED TO ADD RESUME FUNCTION HERE ##
 
@@ -188,12 +201,14 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
 
         # Move to just above place frame
-        self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
+        self.send_and_wait(MoveToFrame(above_place_frame, travel_speed, travel_zone))
+        # self.send_and_wait(MoveToFrame(safe_frame, travel_speed, travel_zone))
+        
 
         # RETURN TO SAVE POINT
         # This command is sent with send_and_wait, to make the client send one
         # pick and place instruction at a time.
-        self.send_and_wait(MoveToFrame(safe_frame, travel_speed, travel_zone))
+        # self.send_and_wait(MoveToFrame(safe_frame, travel_speed, travel_zone))
 
 
     ####
