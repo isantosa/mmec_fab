@@ -144,7 +144,8 @@ class RobotClient(compas_rrc.AbbClient):
         measure_framelike,
         safe_framelike,
         place_framelike,
-        travel_speed=250,
+        # travel_speed=250,
+        travel_speed=500,
         travel_zone=Zone.Z10,
         precise_speed=50,
         precise_zone=Zone.FINE,
@@ -179,10 +180,11 @@ class RobotClient(compas_rrc.AbbClient):
         # Slide to measure wood before cutting
         self.send(MoveToFrame(measure_frame, precise_speed, precise_zone,motion_type=motion_type_precise))
 
+        # Stop to allow human to Cut the Wood
+        self.stop_to_cut()
+
         # Move to just above measure frame
         self.send(MoveToFrame(above_measure_frame, travel_speed, travel_zone))
-
-        ## NEED TO ADD RESUME FUNCTION HERE ##
 
         #### MOVE TO SAFE POINT
         self.send(MoveToFrame(safe_frame, travel_speed, travel_zone))
@@ -195,7 +197,8 @@ class RobotClient(compas_rrc.AbbClient):
         # Move to place frame
         self.send(MoveToFrame(place_frame, precise_speed, precise_zone))
 
-        ## NEED TO ADD RESUME FUNCTION HERE ##
+        # Stop to allow human to nail the Wood
+        self.stop_to_nail()
 
         # Release gripper
         self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
@@ -247,12 +250,31 @@ class RobotClient(compas_rrc.AbbClient):
 
     def confirm_start(self):
         """Stop program and prompt user to press play on pendant to resume."""
-        self.send(compas_rrc.PrintText("Press play when ready."))
+        self.send(compas_rrc.PrintText("Press play To start the Program."))
         self.send(compas_rrc.Stop())
         print("Press start on pendant when ready")
 
         # After user presses play on pendant execution resumes:
         self.send(compas_rrc.PrintText("Resuming execution."))
+
+
+    def stop_to_cut(self):
+        """Stop program and prompt user to press play on pendant to resume."""
+        self.send(compas_rrc.PrintText("stop to Cut, press play When Finish."))
+        self.send(compas_rrc.Stop())
+        print("stop to Cut, press play on pendant to continue")
+
+        # After user presses play on pendant execution resumes:
+        self.send(compas_rrc.PrintText("continue to place and nail process."))
+
+    def stop_to_nail(self):
+        """Stop program and prompt user to press play on pendant to resume."""
+        self.send(compas_rrc.PrintText("stop to Nail, press play when Finish."))
+        self.send(compas_rrc.Stop())
+        print("stop to Nail, press play on pendant to continue")
+
+        # After user presses play on pendant execution resumes:
+        self.send(compas_rrc.PrintText("continue to pick and cut process."))
 
     def check_connection_controller(self, timeout=10):
         """Check connection to ABB controller and raises an exception if not connected.
