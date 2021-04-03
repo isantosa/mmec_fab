@@ -137,7 +137,6 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
 
 
-    ####
     def slice_making(
         self,
         pick_framelike,
@@ -145,7 +144,7 @@ class RobotClient(compas_rrc.AbbClient):
         safe_framelike,
         place_framelike,
         # travel_speed=250,
-        travel_speed=500,
+        travel_speed=1000,
         travel_zone=Zone.Z10,
         precise_speed=50,
         precise_zone=Zone.FINE,
@@ -178,7 +177,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetDigital(GRIPPER_PIN, 1))
 
         # Slide to measure wood before cutting
-        self.send(MoveToFrame(measure_frame, precise_speed, precise_zone,motion_type=motion_type_precise))
+        self.send(MoveToFrame(measure_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
         # Stop to allow human to Cut the Wood
         self.stop_to_cut()
@@ -216,13 +215,15 @@ class RobotClient(compas_rrc.AbbClient):
 
     ####
 
-
-
-    def point_go(
+    def slice_placing(
         self,
-        pick_framelike,
-        place_framelike,
-        travel_speed=250,
+        pick_slice_framelike,
+        safe2_framelike,
+        rotated_safe2_framelike,
+        place_offset_framelike,
+        place_slice_framelike,
+        # travel_speed=250,
+        travel_speed=1000,
         travel_zone=Zone.Z10,
         precise_speed=50,
         precise_zone=Zone.FINE,
@@ -230,12 +231,77 @@ class RobotClient(compas_rrc.AbbClient):
         motion_type_travel=Motion.JOINT,
         motion_type_precise=Motion.LINEAR,
     ):
-        pick_frame = ensure_frame(pick_framelike)
+        pick_slice_frame = ensure_frame(pick_slice_framelike)
+        safe2_frame = ensure_frame(safe2_framelike)
+        rotated_safe2_frame = ensure_frame(rotated_safe2_framelike)
+        place_offset_frame = ensure_frame(place_offset_framelike)
+        place_slice_frame = ensure_frame(place_slice_framelike)
 
-        # PICK
+        above_pick_slice_frame = offset_frame(pick_slice_frame, -offset_distance)
 
-        # Move to pickup frame
-        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone,motion_type_precise))
+        #### MOVE TO SAFE2 POINT
+        self.send_and_wait(MoveToFrame(safe2_frame, travel_speed, travel_zone))
+
+        #### MOVEMENT AT THE SLICE MAKING STATION
+
+        # Move to just above pick_slice frame
+        self.send(MoveToFrame(above_pick_slice_frame, travel_speed, travel_zone))
+
+        # Move to pick_slice frame
+        self.send(MoveToFrame(pick_slice_frame, precise_speed, precise_zone))
+
+        # Activate gripper
+        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 1))
+
+        # Move to just above pick_slice frame
+        self.send(MoveToFrame(above_pick_slice_frame, travel_speed, travel_zone))
+
+        #### MOVE TO SAFE2 POINT
+        self.send(MoveToFrame(safe2_frame, travel_speed, travel_zone))
+
+        # Rotate plane at safe2 point
+        self.send(MoveToFrame(rotated_safe2_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+
+        #### MOVEMENT AT THE SLICE MAKING STATION
+
+        # Move to place_offset frame
+        self.send_and_wait(MoveToFrame(place_offset_frame, travel_speed, travel_zone, motion_type=motion_type_precise))
+
+        # Move to place_slice frame
+        self.send(MoveToFrame(place_slice_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+
+        # Stop to allow human to nail the Wood
+        self.stop_to_nail()
+
+        # Release gripper
+        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
+
+        # move to rotated_safe2 plane
+        self.send_and_wait(MoveToFrame(rotated_safe2_frame, travel_speed, travel_zone, motion_type=motion_type_precise))
+
+
+    ####
+
+
+
+    # def point_go(
+    #     self,
+    #     pick_framelike,
+    #     place_framelike,
+    #     travel_speed=250,
+    #     travel_zone=Zone.Z10,
+    #     precise_speed=50,
+    #     precise_zone=Zone.FINE,
+    #     offset_distance=150,
+    #     motion_type_travel=Motion.JOINT,
+    #     motion_type_precise=Motion.LINEAR,
+    # ):
+    #     pick_frame = ensure_frame(pick_framelike)
+
+    #     # PICK
+
+    #     # Move to pickup frame
+    #     self.send(MoveToFrame(pick_frame, precise_speed, precise_zone,motion_type_precise))
 
 
     # def roll(self, framelike_list, offset_distance, speed=50, zone=1):
