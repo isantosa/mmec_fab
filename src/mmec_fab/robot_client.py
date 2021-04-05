@@ -284,24 +284,27 @@ class RobotClient(compas_rrc.AbbClient):
 
 
 
-    # def point_go(
-    #     self,
-    #     pick_framelike,
-    #     place_framelike,
-    #     travel_speed=250,
-    #     travel_zone=Zone.Z10,
-    #     precise_speed=50,
-    #     precise_zone=Zone.FINE,
-    #     offset_distance=150,
-    #     motion_type_travel=Motion.JOINT,
-    #     motion_type_precise=Motion.LINEAR,
-    # ):
-    #     pick_frame = ensure_frame(pick_framelike)
+    def point_go(
+        self,
+        pick_framelike,
+        place_framelike,
+        travel_speed=250,
+        travel_zone=Zone.Z10,
+        precise_speed=50,
+        precise_zone=Zone.FINE,
+        offset_distance=150,
+        motion_type_travel=Motion.JOINT,
+        motion_type_precise=Motion.LINEAR,
+    ):
+        pick_frame = ensure_frame(pick_framelike)
 
-    #     # PICK
+        # PICK
 
-    #     # Move to pickup frame
-    #     self.send(MoveToFrame(pick_frame, precise_speed, precise_zone,motion_type_precise))
+        # Move to pickup frame
+        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone,motion_type_precise))
+
+
+    ####
 
 
     # def roll(self, framelike_list, offset_distance, speed=50, zone=1):
