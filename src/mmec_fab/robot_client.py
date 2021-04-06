@@ -282,8 +282,6 @@ class RobotClient(compas_rrc.AbbClient):
 
     ####
 
-
-
     def point_go(
         self,
         pick_framelike,
@@ -301,8 +299,29 @@ class RobotClient(compas_rrc.AbbClient):
         # PICK
 
         # Move to pickup frame
-        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone,motion_type_precise))
+        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
+
+    def location_point(
+        self,
+        location_framelike,
+        travel_speed=250,
+        travel_zone=Zone.Z10,
+        precise_speed=50,
+        precise_zone=Zone.FINE,
+        offset_distance=150,
+        motion_type_travel=Motion.JOINT,
+        motion_type_precise=Motion.LINEAR,
+    ):
+        location_frame = ensure_frame(location_framelike)
+
+        # GO TO LOCATION POINT
+
+        # Move to frame
+        self.send_and_wait(MoveToFrame(location_frame, precise_speed, precise_zone,motion_type_precise))
+
+        # Stop to measure
+        self.stop_to_measure()
 
     ####
 
@@ -344,6 +363,16 @@ class RobotClient(compas_rrc.AbbClient):
 
         # After user presses play on pendant execution resumes:
         self.send(compas_rrc.PrintText("continue to pick and cut process."))
+
+    def stop_to_measure(self):
+        """Stop program and prompt user to press play on pendant to resume."""
+        self.send(compas_rrc.PrintText("stop to measure, press play when Finish."))
+        self.send(compas_rrc.Stop())
+        print("stop to measure, press play on pendant to continue")
+
+        # After user presses play on pendant execution resumes:
+        self.send(compas_rrc.PrintText("continue to next location."))
+
 
     def check_connection_controller(self, timeout=10):
         """Check connection to ABB controller and raises an exception if not connected.
