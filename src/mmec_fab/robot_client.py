@@ -304,9 +304,10 @@ class RobotClient(compas_rrc.AbbClient):
         # Stop to measure
         self.stop_to_measure()
 
-    def location_point(
+    def marking(
         self,
-        location_framelike,
+        marking_framelike,
+        dummy_framelike,
         travel_speed=250,
         travel_zone=Zone.Z10,
         precise_speed=50,
@@ -315,12 +316,12 @@ class RobotClient(compas_rrc.AbbClient):
         motion_type_travel=Motion.JOINT,
         motion_type_precise=Motion.LINEAR,
     ):
-        location_frame = ensure_frame(location_framelike)
+        marking_frame = ensure_frame(marking_framelike)
 
         # GO TO LOCATION POINT
 
         # Move to frame
-        self.send_and_wait(MoveToFrame(location_frame, precise_speed, precise_zone,motion_type_precise))
+        self.send_and_wait(MoveToFrame(marking_frame, precise_speed, precise_zone,motion_type_precise))
 
         # Stop to measure
         self.stop_to_measure()
