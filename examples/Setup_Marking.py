@@ -36,6 +36,6 @@ if __name__ == "__main__":
         filepath = "pp_frames.json"
     else:
         print("No input file specified, using example file pp_frames.json")
-        filepath = os.path.abspath(os.path.join(__file__, "..", "frames.json"))
+        filepath = os.path.abspath(os.path.join(__file__, "..", "frames2.json"))
 
     run_point_go(filepath)
