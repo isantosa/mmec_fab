@@ -8,16 +8,17 @@ from compas_rrc import Zone
 from mmec_fab import RobotClient
 
 
-def run_location_point(file_path):
+def run_marking(file_path):
 
     data = json_load(file_path)
 
     with RobotClient() as client:
         client.pre()
 
-        for location in zip(data["location_frames"]):
-            client.location_point(
-                location,
+        for marking, dummy in zip(data["marking_frames"], data["dummy_frames"]):
+            client.marking(
+                marking,
+                dummy,
                 travel_speed=250,
                 travel_zone=Zone.Z10,
                 precise_speed=100,
@@ -37,4 +38,4 @@ if __name__ == "__main__":
         print("No input file specified, using example file 00_location.json")
         filepath = os.path.abspath(os.path.join(__file__, "..", "00_location.json"))
 
-    run_location_point(filepath)
+    run_marking(filepath)
