@@ -299,8 +299,10 @@ class RobotClient(compas_rrc.AbbClient):
         # PICK
 
         # Move to pickup frame
-        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+        self.send_and_wait(MoveToFrame(pick_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
+        # Stop to measure
+        self.stop_to_measure()
 
     def location_point(
         self,
