@@ -39,6 +39,6 @@ if __name__ == "__main__":
         filepath = "02_slice_placing_aa-01.json"
     else:
         print("No input file specified, using example file pp_frames.json")
-        filepath = os.path.abspath(os.path.join(__file__, "..", "02_slice_placing_aa-01.json"))
+        filepath = os.path.abspath(os.path.join(__file__, "..", "02_slice_placing_aa-01-01.json"))
 
     run_slice_placing(filepath)
