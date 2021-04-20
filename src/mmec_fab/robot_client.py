@@ -166,9 +166,18 @@ class RobotClient(compas_rrc.AbbClient):
 
 
         #### MOVE TO SAFE POINT
+
+        # Set Workobject to World Object 0
+        self.send(compas_rrc.SetWorkObject(WOBJ))
+
+        # Safepoint
         self.send(MoveToFrame(safe_frame, travel_speed, travel_zone))
 
+
         #### MOVEMENT AT THE CUTTING STATION
+
+        # Set Workobject to Cutting Station
+        self.send(compas_rrc.SetWorkObject(WOBJ_CT))
 
         # Move to just above pickup frame
         self.send(MoveToFrame(above_pick_frame, travel_speed, travel_zone))
@@ -189,9 +198,18 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(MoveToFrame(above_measure_frame, travel_speed, travel_zone))
 
         #### MOVE TO SAFE POINT
+
+        # Set Workobject to World Object 0
+        self.send(compas_rrc.SetWorkObject(WOBJ))
+
+         # Safepoint
         self.send(MoveToFrame(safe_frame, travel_speed, travel_zone))
 
+
         #### MOVEMENT AT THE SLICE MAKING STATION
+
+        # Set Workobject to Slice Making Station
+        self.send(compas_rrc.SetWorkObject(WOBJ_SL))
 
         # Move to just above place frame
         self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
