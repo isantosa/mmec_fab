@@ -25,6 +25,7 @@ TIMEOUT_LONG = 30
 #TOOL = "tool0"
 TOOL = "t_A057_CalibrationNeedle"
 WOBJ = "wobj0"
+WOBJ_SL = "ob_A057_WobjSliceST"
 
 
 class RobotClient(compas_rrc.AbbClient):
@@ -320,6 +321,9 @@ class RobotClient(compas_rrc.AbbClient):
         marking_frame = ensure_frame(marking_framelike)
 
         # GO TO LOCATION POINT
+
+        # Set Workobject
+        self.send(compas_rrc.SetWorkObject(WOBJ_SL))
 
         # Move to frame
         self.send_and_wait(MoveToFrame(marking_frame, precise_speed, precise_zone,motion_type_precise))
