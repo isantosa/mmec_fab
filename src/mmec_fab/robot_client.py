@@ -22,8 +22,8 @@ SAFE_JOINT_POSITION = [0, 0, 0, 0, 90, 0]  # six values in degrees
 TIMEOUT_SHORT = 10
 TIMEOUT_LONG = 30
 
-#TOOL = "tool0"
-TOOL = "t_A057_CalibrationNeedle"
+TOOL = "tool0"
+# TOOL = "t_A057_CalibrationNeedle"
 WOBJ = "wobj0"
 WOBJ_SL = "ob_A057_WobjSliceST"
 WOBJ_CT = "ob_A057_WobjCutST"
@@ -171,7 +171,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetWorkObject(WOBJ))
 
         # Safepoint
-        self.send(MoveToFrame(safe_frame, travel_speed, travel_zone))
+        self.send(MoveToFrame(safe_frame, travel_speed, travel_zone,motion_type=motion_type_precise))
 
 
         #### MOVEMENT AT THE CUTTING STATION
