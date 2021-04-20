@@ -22,7 +22,8 @@ SAFE_JOINT_POSITION = [0, 0, 0, 0, 90, 0]  # six values in degrees
 TIMEOUT_SHORT = 10
 TIMEOUT_LONG = 30
 
-TOOL = "tool0"
+#TOOL = "tool0"
+TOOL = "t_A057_CalibrationNeedle"
 WOBJ = "wobj0"
 
 
