@@ -27,6 +27,7 @@ TOOL = "tool0"
 WOBJ = "wobj0"
 WOBJ_SL = "ob_A057_WobjSliceST"
 WOBJ_CT = "ob_A057_WobjCutST"
+WOBJ_LT = "ob_A057_WobjLatST"
 
 
 class RobotClient(compas_rrc.AbbClient):
@@ -350,6 +351,33 @@ class RobotClient(compas_rrc.AbbClient):
 
         # Stop to measure
         self.stop_to_measure()
+
+    ####
+
+    def rolling(
+        self,
+        rolling_framelike,
+        dummy_framelike,
+        travel_speed=250,
+        travel_zone=Zone.Z10,
+        precise_speed=50,
+        precise_zone=Zone.FINE,
+        offset_distance=150,
+        motion_type_travel=Motion.JOINT,
+        motion_type_precise=Motion.LINEAR,
+    ):
+        rolling_frame = ensure_frame(rolling_framelike)
+
+        # GO TO LOCATION POINT
+
+        # Set Workobject to Lattice Station
+        self.send(compas_rrc.SetWorkObject(WOBJ_LT))
+
+        # Move to frame
+        self.send_and_wait(MoveToFrame(rolling_frame, precise_speed, precise_zone,motion_type_precise))
+
+        # Stop to measure
+        self.stop_to_nail()
 
     ####
 
