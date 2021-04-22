@@ -14,12 +14,13 @@ def run_base_making(file_path):
 
     with RobotClient() as client:
         client.pre()
-# we override the values here
-        for pick, measure, safe, place in zip(data["pick_frames"], data["measure_frames"], data["safe_frames"], data["place_frames"]):
+
+        for pick, measure, safe, place in zip(data["pick_frames"], data["measure_frames"], data["safe_frames"], data["safeb2_frames"], data["place_frames"]):
             client.slice_making(
                 pick,
                 measure,
                 safe,
+                safeb2,
                 place,
                 travel_speed=250,
                 travel_zone=Zone.Z10,

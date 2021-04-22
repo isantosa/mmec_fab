@@ -146,6 +146,7 @@ class RobotClient(compas_rrc.AbbClient):
         pick_framelike,
         measure_framelike,
         safe_framelike,
+        safeb2_framelike,
         place_framelike,
         # travel_speed=250,
         travel_speed=1000,
@@ -210,6 +211,7 @@ class RobotClient(compas_rrc.AbbClient):
 
          # Second Safepoint
         self.send_and_wait(MoveToFrame(safeb2_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+
 
         #### Move TO LATTICE MAKING STATION
 
