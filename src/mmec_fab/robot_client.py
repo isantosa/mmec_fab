@@ -160,6 +160,7 @@ class RobotClient(compas_rrc.AbbClient):
     ):
         pick_frame = ensure_frame(pick_framelike)
         measure_frame = ensure_frame(measure_framelike)
+        safe_frame = ensure_frame(safe_framelike)
         safeb1_frame = ensure_frame(safeb1_framelike)
         safeb2_frames = ensure_frame(safeb2_framelike)
         place_frame = ensure_frame(place_framelike)
