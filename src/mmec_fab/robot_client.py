@@ -159,6 +159,7 @@ class RobotClient(compas_rrc.AbbClient):
         pick_frame = ensure_frame(pick_framelike)
         measure_frame = ensure_frame(measure_framelike)
         safe_frame = ensure_frame(safe_framelike)
+        safeb2_frames = ensure_frame(safeb2_framelike)
         place_frame = ensure_frame(place_framelike)
 
         above_pick_frame = offset_frame(pick_frame, -offset_distance)
@@ -199,14 +200,16 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(MoveToFrame(above_measure_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
 
-        #### MOVE TO SAFE POINT
+        #### MOVE TO SAFE POINTS
 
         # Set Workobject to World Object 0
         self.send(compas_rrc.SetWorkObject(WOBJ))
 
-         # Safepoint
+         # First Safepoint
         self.send(MoveToFrame(safe_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
+         # Second Safepoint
+        self.send_and_wait(MoveToFrame(safeb2_frames, precise_speed, precise_zone, motion_type=motion_type_precise))
 
         #### Move TO LATTICE MAKING STATION
 
