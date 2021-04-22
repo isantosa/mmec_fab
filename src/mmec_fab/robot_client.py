@@ -27,7 +27,7 @@ TOOL = "tool0"
 WOBJ = "wobj0"
 WOBJ_SL = "ob_A057_WobjSliceST"
 WOBJ_CT = "ob_A057_WobjCutST"
-WOBJ_LT = "ob_A057_WobjLatST"
+WOBJ_LT = "ob_A057_WobjLatticeST"
 
 
 class RobotClient(compas_rrc.AbbClient):
