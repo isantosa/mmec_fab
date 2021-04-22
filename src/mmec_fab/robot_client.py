@@ -141,7 +141,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
 
 
-    def run_base_making(
+    def base_making(
         self,
         pick_framelike,
         measure_framelike,
