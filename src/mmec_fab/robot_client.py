@@ -357,7 +357,7 @@ class RobotClient(compas_rrc.AbbClient):
     def rolling(
         self,
         rolling_framelike,
-        dummy_framelike,
+        saferight_framelike,
         travel_speed=250,
         travel_zone=Zone.Z10,
         precise_speed=50,
@@ -367,6 +367,7 @@ class RobotClient(compas_rrc.AbbClient):
         motion_type_precise=Motion.LINEAR,
     ):
         rolling_frame = ensure_frame(rolling_framelike)
+        # saferight_frame = ensure_frame(rolling_framelike) ----- (need to do loop in loop)
 
         # GO TO LOCATION POINT
 
@@ -380,6 +381,22 @@ class RobotClient(compas_rrc.AbbClient):
         self.stop_to_nail()
 
     ####
+
+    # def roll(
+    # self, framelike_list, 
+    # offset_distance, 
+    # speed=50, 
+    # zone=1
+    # ):
+    #     frame_list = [ensure_frame(framelike) for framelike in framelike_list]
+
+    #     for frame in frame_list:
+    #         above_frame = offset_frame(frame, -offset_distance)
+
+    #         self.send(MoveToFrame(above_frame, speed, zone))
+    #         self.send(MoveToFrame(frame, speed, zone))
+    #         self.send(MoveToFrame(above_frame, speed, zone))
+
 
 
     # def roll(self, framelike_list, offset_distance, speed=50, zone=1):
