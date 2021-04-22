@@ -145,6 +145,7 @@ class RobotClient(compas_rrc.AbbClient):
         self,
         pick_framelike,
         measure_framelike,
+        safe_framelike,
         safeb1_framelike,
         safeb2_framelike,
         place_framelike,
