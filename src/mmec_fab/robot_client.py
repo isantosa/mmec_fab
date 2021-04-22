@@ -145,7 +145,6 @@ class RobotClient(compas_rrc.AbbClient):
         self,
         pick_framelike,
         measure_framelike,
-        safe_framelike,
         safeb1_framelike,
         safeb2_framelike,
         place_framelike,
@@ -160,7 +159,6 @@ class RobotClient(compas_rrc.AbbClient):
     ):
         pick_frame = ensure_frame(pick_framelike)
         measure_frame = ensure_frame(measure_framelike)
-        safe_frame = ensure_frame(safe_framelike)
         safeb1_frame = ensure_frame(safeb1_framelike)
         safeb2_frames = ensure_frame(safeb2_framelike)
         place_frame = ensure_frame(place_framelike)
@@ -175,8 +173,8 @@ class RobotClient(compas_rrc.AbbClient):
         # Set Workobject to World Object 0
         self.send(compas_rrc.SetWorkObject(WOBJ))
 
-        # Safepoint
-        self.send(MoveToFrame(safe_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+        # Safepoint b1 to start
+        self.send(MoveToFrame(safeb1_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
 
         #### Move to CUTTING STATION
