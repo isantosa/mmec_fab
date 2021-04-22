@@ -19,7 +19,6 @@ def run_base_making(file_path):
             client.base_making(
                 pick,
                 measure,
-                safe,
                 safeb1,
                 safeb2,
                 place,
