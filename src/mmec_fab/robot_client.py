@@ -209,7 +209,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(MoveToFrame(safe_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
          # Second Safepoint
-        self.send_and_wait(MoveToFrame(safeb2_frames, precise_speed, precise_zone, motion_type=motion_type_precise))
+        self.send_and_wait(MoveToFrame(safeb2_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
         #### Move TO LATTICE MAKING STATION
 
