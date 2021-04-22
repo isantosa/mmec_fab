@@ -1,0 +1,70 @@
+MODULE RFL_TaskData_Ma(SYSMODULE)
+    !***********************************************************************************
+    !
+    ! ETH Zürich / Robotic Fabrication Lab
+    ! HIB C 13 / Stefano-Franscini-Platz 1
+    ! CH-8093 Zürich
+    !
+    !***********************************************************************************
+    !
+    ! PROJECT     :  A011_RFL
+    !
+    ! FUNCTION    :  Includ all Task specific Data's for ETH
+    !
+    ! AUTHOR      :  Philippe Fleischmann
+    !
+    ! EMAIL       :  fleischmann@arch.ethz.ch
+    !
+    ! HISTORY     :  2016.08.11 Draft
+    !
+    ! Copyright   :  ETH Zürich (CH) 2016
+    !
+    !***********************************************************************************
+    !
+    !************************************************
+    ! Declaration :     bool
+    !************************************************
+    !
+    CONST bool b_RFL_Run:=TRUE;
+    !
+    TASK PERS bool b_RFL_ProjectShortcut:=TRUE;
+
+    !
+    !************************************************
+    ! Declaration :     num
+    !************************************************
+    !
+    TASK PERS num n_RFL_UiListItem:=1;
+    TASK PERS num n_RFL_Answer:=6;
+
+    !************************************************
+    ! Declaration :     string
+    !************************************************
+    !
+    CONST string st_RFL_BtnOkExit{2}:=["Ok","Exit"];
+    !
+    TASK PERS string st_RFL_Taskname:="T_MASTER";
+
+    !************************************************
+    ! Declaration :     btnres
+    !************************************************
+    !
+    TASK PERS btnres btn_RFL_Answer:=1;
+
+    !************************************************
+    ! Declaration :     listitem
+    !************************************************
+    !
+    ! Home 
+    CONST listitem li_RFL_MaWinHome{5}:=[["","ABB"],["","Project"],["","System Helper"],["","Tools & Equipments"],["","Brake Check"]];
+    !
+    ! ABB
+    CONST listitem li_RFL_MaWinABB{1}:=[["","Calibration"]];
+    !
+    ! Project
+    CONST listitem li_RFL_MaWinProject{1}:=[["","A057 MAS Rio"]];
+    !
+    ! Tools and Equipment
+    CONST listitem li_RFL_MaWinToolsAndEqu{2}:=[["","Tools"],["","Equipments"]];
+
+ENDMODULE
