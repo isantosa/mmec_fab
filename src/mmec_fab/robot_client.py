@@ -374,8 +374,8 @@ class RobotClient(compas_rrc.AbbClient):
         # Set Workobject to Lattice Station
         self.send(compas_rrc.SetWorkObject(WOBJ_LT))
 
-        # Close gripper
-        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 1))
+        # Open gripper
+        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
 
         # Stop to measure
         self.stop_to_nail()
@@ -386,8 +386,8 @@ class RobotClient(compas_rrc.AbbClient):
         # Stop to measure
         self.stop_to_nail()
 
-        # Release gripper
-        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
+        # Close gripper
+        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 1))
 
         # Stop to measure
         self.stop_to_nail()
