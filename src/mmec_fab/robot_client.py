@@ -205,7 +205,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetWorkObject(WOBJ))
 
          # Safepoint
-        self.send(MoveToFrame(safe_frame, travel_speed, travel_zone))
+        self.send(MoveToFrame(safe_frame, travel_speed, travel_zone, motion_type=motion_type_precise))
 
 
         #### Move TO LATTICE MAKING STATION
