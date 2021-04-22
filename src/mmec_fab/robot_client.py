@@ -172,7 +172,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetWorkObject(WOBJ))
 
         # Safepoint
-        self.send(MoveToFrame(safe_frame, travel_speed, travel_zone,motion_type=motion_type_precise))
+        self.send(MoveToFrame(safe_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
 
         #### Move to CUTTING STATION
@@ -181,10 +181,10 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetWorkObject(WOBJ_CT))
 
         # Move to just above pickup frame
-        self.send(MoveToFrame(above_pick_frame, travel_speed, travel_zone))
+        self.send(MoveToFrame(above_pick_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
         # Move to pickup frame
-        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone))
+        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
         # Activate gripper
         self.send(compas_rrc.SetDigital(GRIPPER_PIN, 1))
@@ -214,10 +214,10 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetWorkObject(WOBJ_LT))
 
         # Move to just above place frame
-        self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
+        self.send(MoveToFrame(above_place_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
         # Move to place frame
-        self.send(MoveToFrame(place_frame, precise_speed, precise_zone))
+        self.send(MoveToFrame(place_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
         # Stop to allow human to nail the Wood
         self.stop_to_nail()
