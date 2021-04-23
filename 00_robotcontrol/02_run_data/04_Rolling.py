@@ -40,4 +40,3 @@ if __name__ == "__main__":
         # filepath = os.path.abspath(os.path.join(__file__, "..", "04_Rolling_left.json"))
 
     run_rolling(filepath)
-    print(rolling)
