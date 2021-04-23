@@ -27,7 +27,7 @@ TOOL = "tool0"
 WOBJ = "wobj0"
 WOBJ_SL = "ob_A057_WobjSliceST" # Slice making station
 WOBJ_CT = "ob_A057_WobjCutST"   # Cutting Station
-WOBJ_LT = "ob_A057_WobjLatST"   # Lattice making station 
+WOBJ_LT = "ob_A057_WobjLatticeST"   # Lattice making station 
 
 
 class RobotClient(compas_rrc.AbbClient):
