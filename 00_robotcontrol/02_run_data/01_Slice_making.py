@@ -21,7 +21,7 @@ def run_slice_making(file_path):
                 measure,
                 safe,
                 place,
-                travel_speed=250,
+                travel_speed=1000,
                 travel_zone=Zone.Z10,
                 precise_speed=100,
                 precise_zone=Zone.FINE,
@@ -39,7 +39,7 @@ if __name__ == "__main__":
         # filepath = "C:\Users\indra\repos\mmec_fab\00_robotcontrol\02_run_data\01_slice_making\slice_making_aa-01-01.json"
         filepath = "C:/Users/indra/repos/mmec_fab/00_robotcontrol/02_run_data/01_slice_making/slice_making_aa-01-01.json"
     else:
-        print("No input file specified, using example file pp_frames.json")
+        # print("No input file specified, using example file pp_frames.json")
         filepath = os.path.abspath(os.path.join(__file__, "..", "01_slice_making_aa-01-01.json"))
 
     run_slice_making(filepath)

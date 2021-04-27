@@ -23,7 +23,8 @@ TIMEOUT_SHORT = 10
 TIMEOUT_LONG = 30
 
 TOOL = "tool0"
-# TOOL = "t_A057_CalibrationNeedle"
+TOOL_CN = "t_A057_CalibrationNeedle"
+TOOL_MMW = "t_A057_MMWTool03"
 WOBJ = "wobj0"
 WOBJ_SL = "ob_A057_WobjSliceST"
 WOBJ_CT = "ob_A057_WobjCutST"
@@ -79,7 +80,8 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetMaxSpeed(SPEED_OVERRIDE, TCP_MAX_SPEED))
 
         # Set tool and workobject
-        self.send(compas_rrc.SetTool(TOOL))
+        # self.send(compas_rrc.SetTool(TOOL))
+        self.send(compas_rrc.SetTool(TOOL_MMW))
         self.send(compas_rrc.SetWorkObject(WOBJ))
 
         self.confirm_start()
@@ -343,8 +345,9 @@ class RobotClient(compas_rrc.AbbClient):
         # GO TO LOCATION POINT
 
         # Set Workobject
-        # self.send(compas_rrc.SetWorkObject(WOBJ_SL))
-        self.send(compas_rrc.SetWorkObject(WOBJ_CT))
+        self.send(compas_rrc.SetWorkObject(WOBJ_SL))
+        # self.send(compas_rrc.SetWorkObject(WOBJ_CT))
+        # self.send(compas_rrc.SetWorkObject(WOBJ_LT))
 
         # Move to frame
         self.send_and_wait(MoveToFrame(marking_frame, precise_speed, precise_zone,motion_type_precise))
