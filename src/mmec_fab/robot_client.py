@@ -263,10 +263,13 @@ class RobotClient(compas_rrc.AbbClient):
 
         above_pick_slice_frame = offset_frame(pick_slice_frame, -offset_distance)
 
+        #### MOVEMENT AT THE SLICE MAKING STATION
+
+        # Set Workobject to Slice Making Station
+        self.send(compas_rrc.SetWorkObject(WOBJ_SL))
+        
         #### MOVE TO SAFE2 POINT
         self.send_and_wait(MoveToFrame(safe2_frame, travel_speed, travel_zone))
-
-        #### MOVEMENT AT THE SLICE MAKING STATION
 
         # Move to just above pick_slice frame
         self.send(MoveToFrame(above_pick_slice_frame, travel_speed, travel_zone))
@@ -286,7 +289,10 @@ class RobotClient(compas_rrc.AbbClient):
         # Rotate plane at safe2 point
         self.send(MoveToFrame(rotated_safe2_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
-        #### MOVEMENT AT THE SLICE MAKING STATION
+        #### MOVEMENT AT THE LATTICE MAKING STATION
+
+        # Set Workobject to Lattice Station
+        self.send(compas_rrc.SetWorkObject(WOBJ_LT))
 
         # Move to place_offset frame
         self.send_and_wait(MoveToFrame(place_offset_frame, travel_speed, travel_zone, motion_type=motion_type_precise))
@@ -300,33 +306,14 @@ class RobotClient(compas_rrc.AbbClient):
         # Release gripper
         self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
 
+        # Set Workobject to Slice Making Station
+        self.send(compas_rrc.SetWorkObject(WOBJ_SL))
+
         # move to rotated_safe2 plane
         self.send_and_wait(MoveToFrame(rotated_safe2_frame, travel_speed, travel_zone, motion_type=motion_type_precise))
 
 
     ####
-
-    def point_go(
-        self,
-        pick_framelike,
-        place_framelike,
-        travel_speed=250,
-        travel_zone=Zone.Z10,
-        precise_speed=50,
-        precise_zone=Zone.FINE,
-        offset_distance=150,
-        motion_type_travel=Motion.JOINT,
-        motion_type_precise=Motion.LINEAR,
-    ):
-        pick_frame = ensure_frame(pick_framelike)
-
-        # PICK
-
-        # Move to pickup frame
-        self.send_and_wait(MoveToFrame(pick_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
-
-        # Stop to measure
-        self.stop_to_measure()
 
     def marking(
         self,
@@ -372,7 +359,8 @@ class RobotClient(compas_rrc.AbbClient):
         rolling_frame = ensure_frame(rolling_framelike)
         # saferight_frame = ensure_frame(rolling_framelike) ----- (need to do loop in loop)
 
-        # GO TO LOCATION POINT
+    
+        #### MOVEMENT AT THE SLICE MAKING STATION
 
         # Set Workobject to Lattice Station
         self.send(compas_rrc.SetWorkObject(WOBJ_LT))
