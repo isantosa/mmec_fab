@@ -1,0 +1,55 @@
+MODULE C1_R1_SysSpec_Ma(SYSMODULE)
+    !***********************************************************************************
+    !
+    ! ETH Zürich / Robotic Fabrication Lab
+    ! HIB C 13 / Stefano-Franscini-Platz 1
+    ! CH-8093 Zürich
+    !
+    !***********************************************************************************
+    !
+    ! PROJECT     :  A011_RFL
+    !
+    ! FUNCTION    :  Inclouds all system specific informations
+    !
+    ! AUTHOR      :  Philippe Fleischmann
+    !
+    ! EMAIL       :  fleischmann@arch.ethz.ch
+    !
+    ! HISTORY     :  2017.07.06 Draft
+    !
+    ! Copyright   :  ETH Zürich (CH) 2017
+    !
+    !***********************************************************************************
+
+    !************************************************
+    ! Declaration :     bool
+    !************************************************
+    !
+    TASK PERS tasks tl_C1_R1_All{7}:=[["T_MASTER"],["RECEIVER"],["SENDER"],["T_ROB1"],[""],[""],[""]];
+    TASK PERS tasks tl_C1_R1_MaRob{7}:=[["T_MASTER"],["T_ROB1"],[""],[""],[""],[""],[""]];
+    TASK PERS tasks tl_C1_R1_Rob{7}:=[["T_ROB1"],[""],[""],[""],[""],[""],[""]];
+
+    !************************************************
+    ! Function    :     System specification 
+    ! Programmer  :     Philippe Fleischmann
+    ! Date        :     2019.11.27
+    ! **************** ETH Zürich *******************
+    !
+    PROC r_RFL_SysSpec()
+        !
+        ! Tasklist all
+        tl_RFL_All:=tl_RFL_Empty;
+        tl_RFL_All:=tl_C1_R1_All;
+        !
+        ! Tasklist Master Robots
+        tl_RFL_MaRob:=tl_RFL_Empty;
+        tl_RFL_MaRob:=tl_C1_R1_MaRob;
+        !
+        ! Tasklist Robots
+        tl_RFL_Rob:=tl_RFL_Empty;
+        tl_RFL_Rob:=tl_C1_R1_Rob;
+    ERROR
+        ! Placeholder for Error Code...
+    ENDPROC
+
+ENDMODULE

@@ -1,0 +1,61 @@
+MODULE RFL_TaskData_Sen(SYSMODULE)
+    !***********************************************************************************
+    !
+    ! ETH Zürich / Robotic Fabrication Lab
+    ! HIB C 13 / Stefano-Franscini-Platz 1
+    ! CH-8093 Zürich
+    !
+    !***********************************************************************************
+    !
+    ! PROJECT     :  A011_RFL
+    !
+    ! FUNCTION    :  Includ all Task specific Data's for ETH Helper
+    !
+    ! AUTHOR      :  Philippe Fleischmann
+    !
+    ! EMAIL       :  fleischmann@arch.ethz.ch
+    !
+    ! HISTORY     :  2016.08.09 Draft
+    !
+    ! Copyright   :  ETH Zürich (CH) 2016
+    !
+    !***********************************************************************************
+
+    !************************************************
+    ! Declaration :     bool
+    !************************************************
+    !
+    CONST bool b_RFL_Run:=TRUE;
+
+    !************************************************
+    ! Declaration :     num
+    !************************************************
+    !
+    ! Use for all Uilists
+    TASK PERS num n_RFL_UiListItem:=6;
+    TASK PERS num n_RFL_Answer:=1;
+    !
+    VAR num n_RFL_List;
+
+    !************************************************
+    ! Declaration :     string
+    !************************************************
+    !
+    ! Button Array max 5 Items
+    CONST string st_RFL_BtnExit{1}:=["Exit"];
+    CONST string st_RFL_BtnOkExit{2}:=["Ok","Exit"];
+    CONST string st_RFL_BtnToPos{4}:=["X","Y","Z","Exit"];
+    !
+    TASK PERS string st_RFL_Taskname:="SENDER";
+
+    !************************************************
+    ! Declaration :     listitem
+    !************************************************
+    !
+
+    !************************************************
+    ! Declaration :     btnres
+    !************************************************
+    !
+    TASK PERS btnres btnAnswer:=1;
+ENDMODULE

@@ -1,0 +1,16 @@
+Open anaconda using the desktop icon "abb_run_google_drive"
+Run command "rcf_run -v -c real <filename>"
+2AB (night 17 sept) is file "20200917-19.31.49-2AB-with-ppl.json"
+
+So the command is: "rcf_run -v -c real 20200917-19.31.49-2AB-with-ppl.json"
+
+If you need to stop and resume:
+
+Run the file with the suffix IN_PROGRESS. In case there are many (they increase in count e.g. "-IN_PROGRESS01") take the latest.
+
+If you terminated the program AFTER placing cylinder, then select "Start after last element marked as placed.".
+If you terminated the program BEFORE placing cylinder, then select "Select start index" ..  And specfy one index before.
+This is because the cylinder gets marked as placed directly after being picked.
+
+
+rcf_run -v -c real 20200926-23.56.17-5E-0-4-with-ppl2.json

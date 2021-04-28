@@ -1,0 +1,151 @@
+MODULE RFL_TaskData_1(SYSMODULE)
+    !***********************************************************************************
+    !
+    ! ETH Zurich / NCCR Digital Fabrication
+    ! HIP CO 11.1 / Gustave-Naville-Weg 1
+    ! CH-8093 Zürich
+    !
+    !***********************************************************************************
+    !
+    ! PROJECT     :  A011_RFL
+    !
+    ! FUNCTION    :  Includ all Task specific Data's for ETH Helper
+    !
+    ! AUTHOR      :  Philippe Fleischmann
+    !
+    ! EMAIL       :  fleischmann@arch.ethz.ch
+    !
+    ! HISTORY     :  2016.08.09 Draft
+    !
+    ! Copyright   :  ETH Zürich (CH) 2016
+    !
+    !***********************************************************************************
+    !
+    !************************************************
+    ! Declaration :     bool
+    !************************************************
+    !
+    CONST bool b_RFL_Run:=TRUE;
+    !
+    PERS bool b_RFL_SysHFinish:=TRUE;
+
+    !************************************************
+    ! Declaration :     num
+    !************************************************
+    !
+    ! Use for all Uilists
+    TASK PERS num n_RFL_UiListItem:=1;
+    TASK PERS num n_RFL_Answer:=2;
+    !
+    ! Extern Axis Workspace Limits 
+    CONST num n_RFL_MinValueX:=2599;
+    CONST num n_RFL_MaxValueX:=39805;
+    CONST num n_RFL_MinValueY:=-9680;
+    CONST num n_RFL_MaxValueY:=0;
+    CONST num n_RFL_MinValueZ:=-4915;
+    CONST num n_RFL_MaxValueZ:=-1005;
+    !
+    TASK PERS num n_RFL_Temp:=28000;
+    !
+    ! Values for Safe Position
+    CONST num n_RFL_SafePos_Ax_1:=0;
+    CONST num n_RFL_SafePos_Ax_2:=-80;
+    CONST num n_RFL_SafePos_Ax_3:=70;
+    CONST num n_RFL_SafePos_Ax_4:=0;
+    CONST num n_RFL_SafePos_Ax_5:=10;
+    CONST num n_RFL_SafePos_Ax_6:=0;
+    CONST num n_RFL_SafePos_ExAx_A:=15000;
+    CONST num n_RFL_SafePos_ExAx_B:=-3000;
+    CONST num n_RFL_SafePos_ExAx_C:=-4500;
+
+    CONST num n_RFL_ZTop:=-4850;
+    CONST num n_RFL_ZBottom:=-1010;
+    CONST num n_RFL_YPark:=0;
+    CONST num n_RFL_ZPark:=-4850;
+
+    VAR num n_RFL_NewAxisValue;
+    VAR num n_RFL_List;
+
+    !************************************************
+    ! Declaration :     string
+    !************************************************
+    !
+    ! Button Array max 5 Items
+    CONST string st_RFL_BtnOkExit{2}:=["Ok","Exit"];
+    CONST string st_RFL_BtnToPos{4}:=["X","Y","Z","Exit"];
+    !
+    TASK PERS string st_RFL_Taskname:="";
+    !
+    TASK PERS string st_RFL_RobIs:="Home";
+    TASK PERS string st_RFL_RobGo:="Place1";
+    !
+    TASK PERS string st_RFL_TempToolName:="tTemp";
+
+    !************************************************
+    ! Declaration :     listitem
+    !************************************************
+    !
+    CONST listitem li_RFL_MaWinSysH{6}:=[["","To Top"],["","To Compact"],["","To Park"],["","To Service"],["","Copy Pos"],["","Gantry To Pos"]];
+
+    !************************************************
+    ! Declaration :     btnres
+    !************************************************
+    !
+    TASK PERS btnres btn_RFL_Answer:=2;
+
+    !************************************************
+    ! Declaration :     tooldata
+    !************************************************
+    !
+    TASK PERS tooldata t_RFL_Act:=[TRUE,[[-3.41772,-0.339232,506.829],[0.957429,0.000122952,0.288666,0.000735896]],[1,[1,0,0],[1,0,0,0],0,0,0]];
+    TASK PERS tooldata t_RFL_Temp:=[TRUE,[[0,0,0],[1,0,0,0]],[0.001,[0,0,0.001],[1,0,0,0],0,0,0]];
+
+    !************************************************
+    ! Declaration :     jointtarget
+    !************************************************
+    !
+    !* CONST jointtarget jp_X000_CalibPos:=[[0,0,0,0,0,0],[-1425.5,0,0,0,0,0]];
+    CONST jointtarget jp_RFL_CalibPos:=[[0,0,0,0,0,0],[0,0,0,0,0,0]];
+    !
+    TASK PERS jointtarget jp_RFL_Temp:=[[-60.2335,-1.62811,16.9567,140.238,81.5478,59.5527],[28000,-3999.98,-4915,0,0,0]];
+    TASK PERS jointtarget jp_RFL_Store:=[[180,90,1.01189E-28,0,5.25048E-29,-1.2737E-28],[19136.8,-9680,-4915,0,0,0]];
+    TASK PERS jointtarget jp_RFL_Current:=[[-169.664,-79.8938,-102.56,-2.41213,-87.5759,-264.037],[22600.1,-2760.35,-1647.09,0,0,0]];
+    TASK PERS jointtarget jp_RFL_StorePosBeforBrakeCheck:=[[-60.2335,-1.62811,16.9567,140.238,81.5478,59.5527],[28000,-3999.98,-4862.91,0,0,0]];
+    !
+    TASK PERS jointtarget jp_RFL_SafePosZ:=[[0,-80,70,0,10,0],[13583.2,-8292.03,-4500,0,0,0]];
+    !
+    TASK PERS jointtarget jp_RFL_Next:=[[0,-80,70,0,10,0],[32357.7,-2436.99,-4500,0,0,0]];
+    TASK PERS jointtarget jp_RFL_SafePosOnTop:=[[0,-80,70,0,10,0],[23000,-3000,-4500,0,0,0]];
+    TASK PERS jointtarget jp_RFL_PresPos:=[[0,-80,70,0,10,0],[37000,-100,-4500,0,0,0]];
+
+    TASK PERS jointtarget jp_RFL_TrollyPos:=[[0,-50,75,0,0,0],[37000,-100,-4500,0,0,0]];
+
+    !************************************************
+    ! Declaration :     robjoint
+    !************************************************
+    !
+    TASK PERS robjoint rj_RFL_TrollyPos:=[0,-50,75,0,0,0];
+
+    !************************************************
+    ! Declaration :     robtarget
+    !************************************************
+    !
+    TASK PERS robtarget p_RFL_Temp:=[[26952.7,3537.31,666.455],[0.00331555,-0.920499,0.014763,0.390451],[0,2,-1,0],[28000,-3400.01,-2979.81,0,0,0]];
+    TASK PERS robtarget p_RFL_Store:=[[17691.8,9679.99,5825],[1,1.80999E-06,-1.78814E-06,-1.97291E-06],[2,0,-1,0],[19136.8,-9680,-4915,0,0,0]];
+    TASK PERS robtarget p_RFL_Current:=[[17691.8,9679.99,5825],[1,1.80999E-06,-1.78814E-06,-1.97291E-06],[2,0,-1,0],[19136.8,-9680,-4915,0,0,0]];
+    TASK PERS robtarget p_RFL_StorePosBeforBrakeCheck:=[[19269.3,9359.25,2527.77],[0.712505,-0.000136695,-0.701668,-0.000117505],[0,1,-2,1],[20156,-9357.52,-4022.55,0,0,0]];
+    !
+    CONST robtarget p_RFL_RefPoint:=[[19516.81,4483.69,-173.88],[0.115078,-0.881119,0.364973,0.277815],[0,0,2,1],[20000,-4000,-2500,0,0,0]];
+    !TASK PERS wobjdata ob_RFL_Demo21:=[FALSE,TRUE,"",[[0,0,0],[1,0,0,0]],[[0,0,0],[1,0,0,0]]];
+
+    !************************************************
+    ! Declaration :     robjoint
+    !************************************************
+    !
+    CONST robjoint rj_RFL_SafePos:=[0,-80,70,0,10,0];
+    CONST robjoint rj_RFL_Compact:=[0,-65,65,0,35,0];
+    CONST robjoint rj_RFL_Park:=[0,-73,73,0,0,0];
+    CONST robjoint rj_RFL_Service:=[0,115,-115,0,90,0];
+    CONST robjoint rj_RFL_Bottom:=[0,115,-115,0,90,0];
+
+ENDMODULE
