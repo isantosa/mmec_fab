@@ -23,8 +23,8 @@ TIMEOUT_SHORT = 10
 TIMEOUT_LONG = 30
 
 TOOL = "tool0"
+TOOL_MMW = "t_A057_MMWTool03"
 # TOOL = "t_A057_CalibrationNeedle"
-WOBJ = "wobj0"
 WOBJ_SL = "ob_A057_WobjSliceST" # Slice making station
 WOBJ_CT = "ob_A057_WobjCutST"   # Cutting Station
 WOBJ_LT = "ob_A057_WobjLatticeST"   # Lattice making station 
@@ -79,7 +79,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetMaxSpeed(SPEED_OVERRIDE, TCP_MAX_SPEED))
 
         # Set tool and workobject
-        self.send(compas_rrc.SetTool(TOOL))
+        self.send(compas_rrc.SetTool(TOOL_MMW))
         self.send(compas_rrc.SetWorkObject(WOBJ))
 
         self.confirm_start()
