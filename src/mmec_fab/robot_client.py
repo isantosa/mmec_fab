@@ -176,7 +176,6 @@ class RobotClient(compas_rrc.AbbClient):
         # Safepoint
         self.send(MoveToFrame(safe_frame, travel_speed, travel_zone,motion_type=motion_type_precise))
 
-
         #### MOVEMENT AT THE CUTTING STATION
 
         # Set Workobject to Cutting Station
@@ -358,6 +357,8 @@ class RobotClient(compas_rrc.AbbClient):
     ):
         rolling_frame = ensure_frame(rolling_framelike)
         # saferight_frame = ensure_frame(rolling_framelike) ----- (need to do loop in loop)
+
+    
 
     
         #### MOVEMENT AT THE SLICE MAKING STATION
