@@ -191,7 +191,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetDigital(GRIPPER_PIN, 1))
 
         # Slide to measure wood before cutting
-        self.send(MoveToFrame(measure_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+        self.send_and_wait(MoveToFrame(measure_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
         # Stop to allow human to Cut the Wood
         self.stop_to_cut()
@@ -223,7 +223,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.stop_to_nail()
 
         # Release gripper
-        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
+        self.send_and_wait(compas_rrc.SetDigital(GRIPPER_PIN, 0))
 
         # Move to just above place frame
         self.send_and_wait(MoveToFrame(above_place_frame, travel_speed, travel_zone))
