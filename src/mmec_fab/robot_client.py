@@ -25,6 +25,7 @@ TIMEOUT_LONG = 30
 TOOL = "tool0"
 TOOL_MMW = "t_A057_MMWTool03"
 # TOOL = "t_A057_CalibrationNeedle"
+WOBJ = "wobj0"
 WOBJ_SL = "ob_A057_WobjSliceST" # Slice making station
 WOBJ_CT = "ob_A057_WobjCutST"   # Cutting Station
 WOBJ_LT = "ob_A057_WobjLatticeST"   # Lattice making station 
