@@ -23,7 +23,8 @@ TIMEOUT_SHORT = 10
 TIMEOUT_LONG = 30
 
 TOOL = "tool0"
-TOOL_MMW = "t_A057_MMWTool03"
+#TOOL_MMW = "t_A057_MMWTool03"
+TOOL_MMW = "t_A057_MMWTool03b"
 # TOOL = "t_A057_CalibrationNeedle"
 WOBJ = "wobj0"
 WOBJ_SL = "ob_A057_WobjSliceST" # Slice making station
@@ -175,7 +176,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetWorkObject(WOBJ))
 
         # Safepoint b1 to start
-        self.send(MoveToFrame(safeb1_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+        self.send(MoveToFrame(safeb1_frame, travel_speed, travel_zone))
 
 
         #### Move to CUTTING STATION
