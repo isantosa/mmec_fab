@@ -89,11 +89,15 @@ class RobotClient(compas_rrc.AbbClient):
         self.send_and_wait(
             MoveToJoints(SAFE_JOINT_POSITION, self.EXTERNAL_AXES_DUMMY, 150, 50)
         )
+        self.send(compas_rrc.PrintText("Start Production"))
 
     def post(self, safe_joint_position=[0, 0, 0, 0, 90, 0]):
         self.send_and_wait(
             MoveToJoints(SAFE_JOINT_POSITION, self.EXTERNAL_AXES_DUMMY, 150, 50)
         )
+        self.send(compas_rrc.PrintText("Finish Production"))
+
+
 
     def pick_place(
         self,
