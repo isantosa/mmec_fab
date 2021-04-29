@@ -33,9 +33,9 @@ if __name__ == "__main__":
     import sys
 
     if len(sys.argv) > 1:
-        filepath = "xx_Test_cut_2.json"
+        filepath = "00_location_JBtest.json"
     else:
-        print("No input file specified, using example file xx_Test_cut_2")
-        filepath = os.path.abspath(os.path.join(__file__, "..", "xx_Test_cut_2.json"))
+        print("No input file specified, using example file 00_location_JBtest.json")
+        filepath = os.path.abspath(os.path.join(__file__, "..", "00_location_JBtest.json"))
 
     run_marking(filepath)
