@@ -184,10 +184,10 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetWorkObject(WOBJ_CT))
 
         # Move to just above pickup frame
-        self.send(MoveToFrame(above_pick_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+        self.send(MoveToFrame(above_pick_frame, travel_speed, travel_zone))
 
         # Move to pickup frame
-        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone))
 
         # Activate gripper
         self.send(compas_rrc.SetDigital(GRIPPER_PIN, 1))
@@ -199,7 +199,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.stop_to_cut()
 
         # Move to just above measure frame
-        self.send(MoveToFrame(above_measure_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+        self.send(MoveToFrame(above_measure_frame, travel_speed, travel_zone))
 
 
         #### MOVE TO SAFE POINTS
@@ -207,11 +207,11 @@ class RobotClient(compas_rrc.AbbClient):
         # Set Workobject to World Object 0
         self.send(compas_rrc.SetWorkObject(WOBJ))
 
-         # First Safeb1 point
-        self.send(MoveToFrame(safeb1_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+         # First Safe_b1 point
+        self.send(MoveToFrame(safeb1_frame, travel_speed, travel_zone))
 
-         # Second Safeb2 point
-        self.send_and_wait(MoveToFrame(safeb2_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+         # Second Safe_b2 point
+        self.send_and_wait(MoveToFrame(safeb2_frame, travel_speed, travel_zone))
 
 
         #### Move TO LATTICE MAKING STATION
@@ -220,10 +220,10 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetWorkObject(WOBJ_LT))
 
         # Move to just above place frame
-        self.send(MoveToFrame(above_place_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+        self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
 
         # Move to place frame
-        self.send(MoveToFrame(place_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
+        self.send(MoveToFrame(place_frame, precise_speed, precise_zone))
 
         # Stop to allow human to nail the Wood
         self.stop_to_nail()
