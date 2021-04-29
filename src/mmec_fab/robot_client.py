@@ -446,7 +446,7 @@ class RobotClient(compas_rrc.AbbClient):
         # Set Workobject
         # self.send(compas_rrc.SetWorkObject(WOBJ_SL))
         # self.send(compas_rrc.SetWorkObject(WOBJ_CT))
-        self.send(compas_rrc.SetWorkObject(WOBJ))
+        self.send(compas_rrc.SetWorkObject(WOBJ_LT))
 
         # Move to frame
         self.send_and_wait(MoveToFrame(marking_frame, precise_speed, precise_zone,motion_type_precise))
