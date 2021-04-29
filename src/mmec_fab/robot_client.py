@@ -184,7 +184,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetWorkObject(WOBJ_CT))
 
         # Move to just above pickup frame
-        self.send(MoveToFrame(above_pick_frame, travel_speed, travel_zone))
+        self.send_and_wait(MoveToFrame(above_pick_frame, travel_speed, travel_zone))
 
         # Move to pickup frame
         self.send(MoveToFrame(pick_frame, precise_speed, precise_zone))
