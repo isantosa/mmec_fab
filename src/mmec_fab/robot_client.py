@@ -265,6 +265,7 @@ class RobotClient(compas_rrc.AbbClient):
         place_slice_frame = ensure_frame(place_slice_framelike)
 
         above_pick_slice_frame = offset_frame(pick_slice_frame, -offset_distance)
+        offset_place_slice_frame = offset_frame(place_slice_frame, -offset_distance)
 
         #### MOVEMENT AT THE SLICE MAKING STATION
 
@@ -308,6 +309,9 @@ class RobotClient(compas_rrc.AbbClient):
 
         # Release gripper
         self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
+
+        # Move to offset place_slice frame
+        self.send(MoveToFrame(offset_place_slice_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
 
         # Set Workobject to Slice Making Station
         self.send(compas_rrc.SetWorkObject(WOBJ_SL))
