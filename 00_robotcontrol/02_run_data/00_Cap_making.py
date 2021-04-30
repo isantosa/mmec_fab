@@ -42,4 +42,4 @@ if __name__ == "__main__":
         print("No input file specified, using example file pp_frames.json")
         filepath = os.path.abspath(os.path.join(__file__, "..", "00_Cap_making_aa-0.json"))
 
-    run_base_making(filepath)
+    run_cap_making(filepath)
