@@ -410,8 +410,7 @@ class RobotClient(compas_rrc.AbbClient):
         self,
         pick_framelike,
         measure_framelike,
-        safeb1_framelike,
-        safeb2_framelike,
+        safe_framelike,
         place_framelike,
         # travel_speed=250,
         travel_speed=1000,
@@ -424,8 +423,7 @@ class RobotClient(compas_rrc.AbbClient):
     ):
         pick_frame = ensure_frame(pick_framelike)
         measure_frame = ensure_frame(measure_framelike)
-        safeb1_frame = ensure_frame(safeb1_framelike)
-        safeb2_frame = ensure_frame(safeb2_framelike)
+        safe_frame = ensure_frame(safe_framelike)
         place_frame = ensure_frame(place_framelike)
 
         above_pick_frame = offset_frame(pick_frame, -offset_distance)
@@ -466,16 +464,13 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(MoveToFrame(above_measure_frame, travel_speed, travel_zone))
 
 
-        #### MOVE TO SAFE POINTS
+        #### MOVE TO SAFE POINT
 
         # Set Workobject to World Object 0
         self.send(compas_rrc.SetWorkObject(WOBJ))
 
-         # First Safe_b1 point
+         # Safe point
         self.send(MoveToFrame(safeb1_frame, travel_speed, travel_zone))
-
-         # Second Safe_b2 point
-        self.send_and_wait(MoveToFrame(safeb2_frame, travel_speed, travel_zone))
 
 
         #### Move TO SLICE MAKING STATION
