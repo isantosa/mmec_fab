@@ -469,7 +469,7 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(compas_rrc.SetWorkObject(WOBJ))
 
          # Safe point
-        self.send(MoveToFrame(safeb1_frame, travel_speed, travel_zone))
+        self.send(MoveToFrame(safe_frame, travel_speed, travel_zone))
 
 
         #### Move TO SLICE MAKING STATION

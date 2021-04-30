@@ -15,12 +15,11 @@ def run_cap_making(file_path):
     with RobotClient() as client:
         client.pre()
 
-        for pick, measure, safeb1, safeb2, place in zip(data["pick_frames"], data["measure_frames"], data["safeb1_frames"], data["safeb2_frames"], data["place_frames"]):
+        for pick, measure, safeb1, safeb2, place in zip(data["pick_frames"], data["measure_frames"], data["safe_frames"], data["place_frames"]):
             client.base_making(
                 pick,
                 measure,
-                safeb1,
-                safeb2,
+                safe,
                 place,
                 travel_speed=250,
                 travel_zone=Zone.Z10,
