@@ -430,7 +430,6 @@ class RobotClient(compas_rrc.AbbClient):
         above_measure_frame = offset_frame(measure_frame, -offset_distance)
         above_place_frame = offset_frame(place_frame, -offset_distance)
 
-
         #### MOVE TO SAFE POINT
 
         # Set Workobject to World Object 0
