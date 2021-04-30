@@ -435,8 +435,8 @@ class RobotClient(compas_rrc.AbbClient):
         # Set Workobject to World Object 0
         self.send(compas_rrc.SetWorkObject(WOBJ))
 
-        # Safepoint b1 to start
-        self.send(MoveToFrame(safeb1_frame, travel_speed, travel_zone, motion_type=motion_type_precise))
+        # Move to Safepoint 
+        self.send(MoveToFrame(safe_frame, travel_speed, travel_zone, motion_type=motion_type_precise))
 
 
         #### Move to CUTTING STATION

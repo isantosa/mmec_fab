@@ -15,8 +15,8 @@ def run_cap_making(file_path):
     with RobotClient() as client:
         client.pre()
 
-        for pick, measure, safeb1, safeb2, place in zip(data["pick_frames"], data["measure_frames"], data["safe_frames"], data["place_frames"]):
-            client.base_making(
+        for pick, measure, safe, place in zip(data["pick_frames"], data["measure_frames"], data["safe_frames"], data["place_frames"]):
+            client.cap_making(
                 pick,
                 measure,
                 safe,
