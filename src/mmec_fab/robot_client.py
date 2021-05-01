@@ -359,11 +359,12 @@ class RobotClient(compas_rrc.AbbClient):
         travel_zone=Zone.Z10,
         precise_speed=50,
         precise_zone=Zone.FINE,
-        offset_distance=150,
+        offset_distance=4,
         motion_type_travel=Motion.JOINT,
         motion_type_precise=Motion.LINEAR,
     ):
         rolling_frame = ensure_frame(rolling_framelike)
+        offset_rolling_frame = offset_frame(rolling_frame, -offset_distance)
         # saferight_frame = ensure_frame(rolling_framelike) ----- (need to do loop in loop)
 
     
@@ -380,6 +381,9 @@ class RobotClient(compas_rrc.AbbClient):
         # Stop to measure
         self.stop_to_nail()
         
+        # Move to frame
+        self.send_and_wait(MoveToFrame(offset_rolling_frame, precise_speed, precise_zone,motion_type_precise))
+
         # Move to frame
         self.send_and_wait(MoveToFrame(rolling_frame, precise_speed, precise_zone,motion_type_precise))
 
