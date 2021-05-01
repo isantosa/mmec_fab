@@ -25,7 +25,7 @@ def run_making_placing(file_path):
                 travel_zone=Zone.Z10,
                 precise_speed=100,
                 precise_zone=Zone.FINE,
-                offset_distance=150,
+                offset_distance=4,
             )
         for pick_slice, safe2, rotated_safe2, place_offset, place_slice in zip(data["pick_slice_frames"], data["safe2_frames"], data["rotated_safe2_frames"], data["place_offset_frames"], data["place_slice_frames"]):
             client.slice_placing(
