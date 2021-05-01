@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IPPNIO>
+	<Version>
+		<UUID ExCRC="1">7EB73585F5674166BCE168ED55440F36</UUID>
+		<CfgBrokerVersion>18.630.0.38</CfgBrokerVersion>
+		<CRC CRCVal="1409262018" ExCRC="1"></CRC>
+	</Version>
+	<CtlrParas>
+		<CtlrIP d1="192" d2="168" d3="5" d4="10" ExCRC="1"></CtlrIP>
+		<CtlrMask d1="255" d2="255" d3="255" d4="0" ExCRC="1"></CtlrMask>
+		<CtlrGate d1="192" d2="168" d3="5" d4="10" ExCRC="1"></CtlrGate>
+		<StatN>IRC5-Master-C1</StatN>
+		<Station ExCRC="1"></Station>
+		<DevName ExCRC="1"></DevName>
+		<ModEquId ExCRC="1"></ModEquId>
+		<FDCMLFile>Profinet\KW-Software\KW-Softwarev01_3.80.xml</FDCMLFile>
+		<CEId>CommEnt_3</CEId>
+	</CtlrParas>
+	<ARs>
+		<AR BlVers="256" ARTyp="IO_AR_SINGLE" ARUID="1" MulWrt="true" PRL="NO">
+			<ARUUID d1="2120000570" d2="50127" d3="16946" d4="160" d5="215" d6="74" d7="112" d8="87" d9="83" d10="243" d11="214"></ARUUID>
+			<ARProp State="PRIMARY" SVTO="NOT_ALLOWED" PSrv="CM_INITIATOR" DRate="DR_AT_LEAST_100_MBIT" CRTr="SRT_TRANSPORT" CfgDiff="NOT_ALLOWED" LogConStat="YES" IgnFS="NO" Safety="NO" StartAR="YES" ArCRC="1028581205"></ARProp>
+			<CRs CRCnt="2">
+				<CRPara BlVers="256" CRID="1" RTCls="RT_CLASS1_RTC" MdRedn="false" CRTyp="INPUT_CR" DatLn="7" FrID="49152" SndClc="32" RedRat="8" Phs="8" Seq="0" FrOffst="BEST_EFFORT" WtchD="24" DatHld="24" APDUOffst="42">
+					<CRHdr VLID="NO_VLANID" CRPrio="IOCR_PRIORITY"></CRHdr>
+					<MCAddr d1="0" d2="0" d3="0" d4="0" d5="0" d6="0"></MCAddr>
+					<RelAPICRs APICnt="1">
+						<APICR API="0">
+							<RelDatas RelDatCnt="5">
+								<RelDat SlNr="0" SSlNr="1"></RelDat>
+								<RelDat SlNr="0" SSlNr="32768"></RelDat>
+								<RelDat SlNr="0" SSlNr="32769"></RelDat>
+								<RelDat SlNr="0" SSlNr="32770"></RelDat>
+								<RelDat SlNr="1" SSlNr="1"></RelDat>
+							</RelDatas>
+							<RelIOCSs RelIOCSCnt="1">
+								<RelIOCS SlNr="2" SSlNr="1"></RelIOCS>
+							</RelIOCSs>
+						</APICR>
+					</RelAPICRs>
+				</CRPara>
+				<CRPara BlVers="256" CRID="1" RTCls="RT_CLASS1_RTC" MdRedn="false" CRTyp="OUTPUT_CR" DatLn="7" FrID="65535" SndClc="32" RedRat="8" Phs="8" Seq="0" FrOffst="BEST_EFFORT" WtchD="24" DatHld="24">
+					<CRHdr VLID="NO_VLANID" CRPrio="IOCR_PRIORITY"></CRHdr>
+					<MCAddr d1="0" d2="0" d3="0" d4="0" d5="0" d6="0"></MCAddr>
+					<RelAPICRs APICnt="1">
+						<APICR API="0">
+							<RelDatas RelDatCnt="1">
+								<RelDat SlNr="2" SSlNr="1"></RelDat>
+							</RelDatas>
+							<RelIOCSs RelIOCSCnt="5">
+								<RelIOCS SlNr="0" SSlNr="1"></RelIOCS>
+								<RelIOCS SlNr="0" SSlNr="32768"></RelIOCS>
+								<RelIOCS SlNr="0" SSlNr="32769"></RelIOCS>
+								<RelIOCS SlNr="0" SSlNr="32770"></RelIOCS>
+								<RelIOCS SlNr="1" SSlNr="1"></RelIOCS>
+							</RelIOCSs>
+						</APICR>
+					</RelAPICRs>
+				</CRPara>
+			</CRs>
+			<ModParas ModParCnt="3">
+				<ModPara SlNr="0">
+					<ModName ExCRC="1"></ModName>
+					<ModEquId ExCRC="1"></ModEquId>
+					<FDCMLFile>PROFINET\Beckhoff\Modules\DAP_EK9300_20141027-EK9300 V 2.31 (at least FW 2.00)_DAP 2.xml</FDCMLFile>
+					<CEId>ceModule</CEId>
+				</ModPara>
+				<ModPara SlNr="1">
+					<ModName ExCRC="1"></ModName>
+					<ModEquId ExCRC="1"></ModEquId>
+					<FDCMLFile>PROFINET\Beckhoff\Modules\EK9300_20141027-EL1008_EL1008.xml</FDCMLFile>
+					<CEId>ceModule</CEId>
+				</ModPara>
+				<ModPara SlNr="2">
+					<ModName ExCRC="1"></ModName>
+					<ModEquId ExCRC="1"></ModEquId>
+					<FDCMLFile>PROFINET\Beckhoff\Modules\EK9300_20141027-EL2008_EL2008.xml</FDCMLFile>
+					<CEId>ceModule</CEId>
+				</ModPara>
+			</ModParas>
+			<SMParas SMCnt="3">
+				<SMPara>
+					<RelAPISMs BlVers="256" RelAPICnt="1">
+						<APISM API="0" SlNr="0" ModID="5" ModProp="0">
+							<SMs SMCnt="4">
+								<SMDes SSlNr="1" SMID="1" NdID="229">
+									<SMProp Shar="INVALID" SMTyp="NO_IO"></SMProp>
+									<SMElDess ElCnt="2">
+										<SMElDes Intpret="IOPS" Descr="DATA_INPUT" Len="1" SubsMod="NULL_VALUE" Offst="3"></SMElDes>
+										<SMElDes Intpret="IOCS" Descr="DATA_OUTPUT" Len="1" SubsMod="NULL_VALUE" Offst="0"></SMElDes>
+									</SMElDess>
+									<ModName ExCRC="1"></ModName>
+									<ModEquId ExCRC="1"></ModEquId>
+									<FDCMLFile>PROFINET\Beckhoff\Modules\DAP_EK9300_20141027-EK9300 V 2.31 (at least FW 2.00)_DAP 2.xml</FDCMLFile>
+									<CEId>ceSubModule1</CEId>
+								</SMDes>
+								<SMDes SSlNr="32768" SMID="32768" NdID="230">
+									<SMProp Shar="INVALID" SMTyp="NO_IO"></SMProp>
+									<SMElDess ElCnt="2">
+										<SMElDes Intpret="IOPS" Descr="DATA_INPUT" Len="1" SubsMod="NULL_VALUE" Offst="4"></SMElDes>
+										<SMElDes Intpret="IOCS" Descr="DATA_OUTPUT" Len="1" SubsMod="NULL_VALUE" Offst="1"></SMElDes>
+									</SMElDess>
+									<ModName ExCRC="1"></ModName>
+									<ModEquId ExCRC="1"></ModEquId>
+									<FDCMLFile>PROFINET\Beckhoff\Modules\DAP_EK9300_20141027-EK9300 V 2.31 (at least FW 2.00)_DAP 2.xml</FDCMLFile>
+									<CEId>ceSubModuleInt1</CEId>
+								</SMDes>
+								<SMDes SSlNr="32769" SMID="32769" NdID="231">
+									<SMProp Shar="INVALID" SMTyp="NO_IO"></SMProp>
+									<SMElDess ElCnt="2">
+										<SMElDes Intpret="IOPS" Descr="DATA_INPUT" Len="1" SubsMod="NULL_VALUE" Offst="5"></SMElDes>
+										<SMElDes Intpret="IOCS" Descr="DATA_OUTPUT" Len="1" SubsMod="NULL_VALUE" Offst="2"></SMElDes>
+									</SMElDess>
+									<ModName ExCRC="1"></ModName>
+									<ModEquId ExCRC="1"></ModEquId>
+									<FDCMLFile>PROFINET\Beckhoff\Modules\DAP_EK9300_20141027-EK9300 V 2.31 (at least FW 2.00)_DAP 2.xml</FDCMLFile>
+									<CEId>ceSubModulePort1</CEId>
+								</SMDes>
+								<SMDes SSlNr="32770" SMID="32770" NdID="232">
+									<SMProp Shar="INVALID" SMTyp="NO_IO"></SMProp>
+									<SMElDess ElCnt="2">
+										<SMElDes Intpret="IOPS" Descr="DATA_INPUT" Len="1" SubsMod="NULL_VALUE" Offst="6"></SMElDes>
+										<SMElDes Intpret="IOCS" Descr="DATA_OUTPUT" Len="1" SubsMod="NULL_VALUE" Offst="3"></SMElDes>
+									</SMElDess>
+									<ModName ExCRC="1"></ModName>
+									<ModEquId ExCRC="1"></ModEquId>
+									<FDCMLFile>PROFINET\Beckhoff\Modules\DAP_EK9300_20141027-EK9300 V 2.31 (at least FW 2.00)_DAP 2.xml</FDCMLFile>
+									<CEId>ceSubModulePort2</CEId>
+								</SMDes>
+							</SMs>
+						</APISM>
+					</RelAPISMs>
+				</SMPara>
+				<SMPara>
+					<RelAPISMs BlVers="256" RelAPICnt="1">
+						<APISM API="0" SlNr="1" ModID="66060288" ModProp="0">
+							<SMs SMCnt="1">
+								<SMDes SSlNr="1" SMID="810680321" NdID="234">
+									<SMProp Shar="NO_SHARED_INPUT" SMTyp="INPUT"></SMProp>
+									<SMElDess ElCnt="3">
+										<SMElDes Intpret="DATA" Descr="DATA_INPUT" Len="1" SubsMod="NULL_VALUE" Offst="1"></SMElDes>
+										<SMElDes Intpret="IOPS" Descr="DATA_INPUT" Len="1" SubsMod="NULL_VALUE" Offst="2"></SMElDes>
+										<SMElDes Intpret="IOCS" Descr="DATA_OUTPUT" Len="1" SubsMod="NULL_VALUE" Offst="4"></SMElDes>
+									</SMElDess>
+									<ModName ExCRC="1"></ModName>
+									<ModEquId ExCRC="1"></ModEquId>
+									<FDCMLFile>PROFINET\Beckhoff\Modules\EK9300_20141027-EL1008_EL1008.xml</FDCMLFile>
+									<CEId>ceModule</CEId>
+								</SMDes>
+							</SMs>
+						</APISM>
+					</RelAPISMs>
+				</SMPara>
+				<SMPara>
+					<RelAPISMs BlVers="256" RelAPICnt="1">
+						<APISM API="0" SlNr="2" ModID="131596288" ModProp="0">
+							<SMs SMCnt="1">
+								<SMDes SSlNr="1" SMID="810680321" NdID="256">
+									<SMProp Shar="INVALID" SMTyp="OUTPUT"></SMProp>
+									<SMElDess ElCnt="3">
+										<SMElDes Intpret="IOCS" Descr="DATA_INPUT" Len="1" SubsMod="NULL_VALUE" Offst="0"></SMElDes>
+										<SMElDes Intpret="DATA" Descr="DATA_OUTPUT" Len="1" SubsMod="NULL_VALUE" Offst="5"></SMElDes>
+										<SMElDes Intpret="IOPS" Descr="DATA_OUTPUT" Len="1" SubsMod="NULL_VALUE" Offst="6"></SMElDes>
+									</SMElDess>
+									<ModName ExCRC="1"></ModName>
+									<ModEquId ExCRC="1"></ModEquId>
+									<FDCMLFile>PROFINET\Beckhoff\Modules\EK9300_20141027-EL2008_EL2008.xml</FDCMLFile>
+									<CEId>ceModule</CEId>
+								</SMDes>
+							</SMs>
+						</APISM>
+					</RelAPISMs>
+				</SMPara>
+			</SMParas>
+			<AlCRParas AlCRCnt="1">
+				<AlCRPara BlVers="256" AlCRPrTp="DATA_RTA_PDU" Prio="USER_PRIORITY" RTATmout="500" Retr="3" LocAlRef="0" MaxAlLen="200"></AlCRPara>
+			</AlCRParas>
+			<DevParas>
+				<DevPara DevID="9153" VndID="288" DevIns="0" StatNLen="18" StatN="pnetc1iobox.ek9300" IPovDNS="false" UseIODevIpAdr="NO">
+					<IP d1="192" d2="168" d3="5" d4="101"></IP>
+					<Mask d1="255" d2="255" d3="255" d4="0"></Mask>
+					<Gate d1="192" d2="168" d3="5" d4="101"></Gate>
+					<Station ExCRC="1"></Station>
+					<DevName ExCRC="1"></DevName>
+					<ModEquId ExCRC="1"></ModEquId>
+					<FDCMLFile>PROFINET\Beckhoff\EK9300_20141027_ek9300_DAP 2.xml</FDCMLFile>
+					<CEId>CommEnt_1</CEId>
+				</DevPara>
+			</DevParas>
+			<ARParas>
+				<ARPara SlNr="0" SSlNr="1" Idx="8193" ParaLen="4">
+					<Para>04010000</Para>
+				</ARPara>
+				<ARPara SlNr="2" SSlNr="1" Idx="8192" ParaLen="4">
+					<Para>00000000</Para>
+				</ARPara>
+			</ARParas>
+		</AR>
+	</ARs>
+</IPPNIO>
