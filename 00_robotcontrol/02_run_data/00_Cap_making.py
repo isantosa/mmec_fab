@@ -37,9 +37,9 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         # filepath = "slice_making_aa-01-01.json"
         # filepath = "C:\Users\indra\repos\mmec_fab\00_robotcontrol\02_run_data\01_slice_making\slice_making_aa-01-01.json"
-        filepath = "C:/Users/Jomana/Documents/GKR/mmec_fab/00_robotcontrol/02_run_data00_Cap_making_aa-0.json"
+        filepath = "C:/Users/Jomana/Documents/GKR/mmec_fab/00_robotcontrol/02_run_data/00_Cap_making_aa-01-1.json"
     else:
         print("No input file specified, using example file pp_frames.json")
-        filepath = os.path.abspath(os.path.join(__file__, "..", "00_Cap_making_aa-0.json"))
+        filepath = os.path.abspath(os.path.join(__file__, "..", "00_Cap_making_aa-01-1.json"))
 
     run_cap_making(filepath)
