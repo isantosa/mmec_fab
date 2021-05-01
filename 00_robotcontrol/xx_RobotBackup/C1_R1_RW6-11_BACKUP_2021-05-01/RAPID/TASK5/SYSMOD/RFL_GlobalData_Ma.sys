@@ -1,0 +1,144 @@
+MODULE RFL_GlobalData_Ma(SYSMODULE)
+    !***********************************************************************************
+    !
+    ! ETH Zurich / NCCR Digital Fabrication
+    ! HIP CO 11.1 / Gustave-Naville-Weg 1
+    ! CH-8093 Zürich
+    !
+    !***********************************************************************************
+    !
+    ! PROJECT     :  A011_RFL
+    !
+    ! FUNCTION    :  Includ all Global Data's for ETH Helper
+    !
+    ! AUTHOR      :  Philippe Fleischmann
+    !
+    ! EMAIL       :  fleischmann@arch.ethz.ch
+    !
+    ! HISTORY     :  2016.08.11 Draft
+    !
+    ! Copyright   :  ETH Zürich (CH) 2016
+    !
+    !***********************************************************************************
+
+    !************************************************
+    ! Declaration :     bool
+    !************************************************
+    !
+    PERS bool b_RFL_WaitForJob:=FALSE;
+
+    !************************************************
+    ! Declaration :     num
+    !************************************************
+    !
+    ! Values used for VelSet
+    PERS num n_RFL_MaxTCP:=100;
+    PERS num n_RFL_Override:=5;
+    !
+    ! Timer
+    PERS num n_RFL_TimeTaskLiAll:=0.1;
+    PERS num n_RFL_TimeTPMsg:=2;
+    PERS num n_RFL_TimUserReaction:=1;
+
+    !************************************************
+    ! Declaration :     string
+    !************************************************
+    !
+    PERS string st_RFL_JobFrmMa:="r_A057_Main";
+    PERS string st_RFL_CurMaJob:="A057";
+
+    !************************************************
+    ! Declaration :     string {array}
+    !************************************************
+    !
+    PERS string st_RFL_BtnRobTasks{5}:=["T_ROB1","","","","Exit"];
+
+    !************************************************
+    ! Declaration :     speeddata
+    !************************************************
+    !
+    PERS speeddata v_RFL_SysHMin:=[50,25,100,50];
+    PERS speeddata v_RFL_SysHMed:=[500,100,500,100];
+    PERS speeddata v_RFL_SysHMax:=[800,250,800,250];
+    !
+    PERS speeddata v_RFL_Min:=[250,100,250,500];
+    PERS speeddata v_RFL_Med:=[500,250,500,750];
+    PERS speeddata v_RFL_Max:=[1000,500,1000,1000];
+    !
+    ! For Safe position
+    PERS speeddata v_RFL_SafePosMin:=[250,100,250,500];
+    PERS speeddata v_RFL_SafePosMed:=[500,250,500,750];
+    PERS speeddata v_RFL_SafePosMax:=[1000,500,1000,1000];
+    !
+    PERS speeddata vRestorPos:=[250,100,250,500];
+    !
+    PERS speeddata v_RFL_RefPointMin:=[5,100,250,500];
+    PERS speeddata v_RFL_RefPointMed:=[50,100,250,500];
+    PERS speeddata v_RFL_RefPointMax:=[250,500,1000,1000];
+
+    !************************************************
+    ! Declaration :     zonedata
+    !************************************************
+    !
+    PERS zonedata z_RFL_MaMin:=[FALSE,10,15,15,1.5,15,1.5];
+    PERS zonedata z_RFL_MaMed:=[FALSE,100,150,150,15,150,15];
+    PERS zonedata z_RFL_MaMax:=[FALSE,200,300,300,30,300,30];
+
+    !************************************************
+    ! Declaration :     tasklist
+    !************************************************
+    !
+    PERS tasks tl_RFL_Empty{7}:=[[""],[""],[""],[""],[""],[""],[""]];
+    !
+    PERS tasks tl_RFL_All{7}:=[["T_MASTER"],["RECEIVER"],["SENDER"],["T_ROB1"],[""],[""],[""]];
+    PERS tasks tl_RFL_MaRob{7}:=[["T_MASTER"],["T_ROB1"],[""],[""],[""],[""],[""]];
+    PERS tasks tl_RFL_Rob{7}:=[["T_ROB1"],[""],[""],[""],[""],[""],[""]];
+    !
+    PERS tasks tl_RFL_MaRecSen{7}:=[["T_MASTER"],["RECEIVER"],["SENDER"],[""],[""],[""],[""]];
+
+    !************************************************
+    ! Declaration :     syncident
+    !************************************************
+    !
+    VAR syncident id_ABB_ExampleSta;
+    VAR syncident id_ABB_ExampleEnd;
+    !
+    VAR syncident id_ABB_CraneSta;
+    VAR syncident id_ABB_CraneEnd;
+    ! 
+    VAR syncident id_ABB_CalibPosSta;
+    VAR syncident id_ABB_CalibPosEnd;
+    !
+    VAR syncident id_ABB_BrakeCheckStart;
+    VAR syncident id_ABB_BrakeCheckInPos;
+    VAR syncident id_ABB_BrakeCheckDone;
+    VAR syncident id_ABB_BrakeCheckEnd;
+    !
+    VAR syncident id_RFL_MaInitDone;
+    !
+    VAR syncident id_RFL_InitTaskSta;
+    VAR syncident id_RFL_InitTaskEnd;
+    !
+    VAR syncident id_RFL_InitVarSta;
+    VAR syncident id_RFL_InitVarEnd;
+    !
+    VAR syncident id_RFL_InitSigSta;
+    VAR syncident id_RFL_InitSigEnd;
+    !
+    VAR syncident id_RFL_InitSpeedSta;
+    VAR syncident id_RFL_InitSpeedSet;
+    VAR syncident id_RFL_InitSpeedEnd;
+    !
+    VAR syncident id_RFL_ExeJobFrmMaSta;
+    VAR syncident id_RFL_ExeJobFrmMaEnd;
+    !
+    VAR syncident id_RFL_SysHSta;
+    VAR syncident id_RFL_SysHEnd;
+
+    !************************************************
+    ! Declaration :     listitem
+    !************************************************
+    !
+    PERS listitem li_RFL_AllAxes{9}:=[["","A1"],["","A2"],["","A3"],["","A4"],["","A5"],["","A6"],["","AX"],["","AY"],["","AZ"]];
+
+ENDMODULE
