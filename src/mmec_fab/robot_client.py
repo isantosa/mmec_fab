@@ -97,6 +97,11 @@ class RobotClient(compas_rrc.AbbClient):
         )
         self.send(compas_rrc.PrintText("Finish Production"))
 
+    # def pre_Rolling(self, safe_joint_position=[0, 0, 0, 0, 90, 0]):
+    #     self.send_and_wait(
+    #         MoveToJoints(SAFE_JOINT_POSITION, self.EXTERNAL_AXES_DUMMY, 150, 50)
+    #     )
+
 
 
     def pick_place(
