@@ -15,7 +15,7 @@ def run_rolling(file_path):
     with RobotClient() as client:
         client.pre()
 
-        # client.pre_Rolling()
+        client.pre_Rolling()
 
         for rolling, saferight in zip(data["rolling_frames"], data["saferight_frames"]):
             client.rolling(
