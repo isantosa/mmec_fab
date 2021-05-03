@@ -12,6 +12,7 @@ def run_rolling(file_path):
 
     data = json_load(file_path)
 
+
     with RobotClient() as client:
         client.pre()
 
