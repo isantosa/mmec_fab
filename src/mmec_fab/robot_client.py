@@ -143,106 +143,6 @@ class RobotClient(compas_rrc.AbbClient):
         self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
 
 
-    def base_making(
-        self,
-        pick_framelike,
-        measure_framelike,
-        safeb1_framelike,
-        safeb2_framelike,
-        place_framelike,
-        # travel_speed=250,
-        travel_speed=1000,
-        travel_zone=Zone.Z10,
-        precise_speed=50,
-        precise_zone=Zone.FINE,
-        offset_distance=150,
-        motion_type_travel=Motion.JOINT,
-        motion_type_precise=Motion.LINEAR,
-    ):
-        pick_frame = ensure_frame(pick_framelike)
-        measure_frame = ensure_frame(measure_framelike)
-        safeb1_frame = ensure_frame(safeb1_framelike)
-        safeb2_frame = ensure_frame(safeb2_framelike)
-        place_frame = ensure_frame(place_framelike)
-
-        above_pick_frame = offset_frame(pick_frame, -offset_distance)
-        above_measure_frame = offset_frame(measure_frame, -offset_distance)
-        above_place_frame = offset_frame(place_frame, -offset_distance)
-
-
-        #### MOVE TO SAFE POINT
-
-        # Set Workobject to World Object 0
-        self.send(compas_rrc.SetWorkObject(WOBJ))
-
-        # Safepoint b1 to start
-        self.send(MoveToFrame(safeb1_frame, travel_speed, travel_zone, motion_type=motion_type_precise))
-
-
-        #### Move to CUTTING STATION
-
-        # Set Workobject to Cutting Station
-        self.send(compas_rrc.SetWorkObject(WOBJ_CT))
-
-        # Move to just above pickup frame
-        self.send_and_wait(MoveToFrame(above_pick_frame, travel_speed, travel_zone))
-
-        # Move to pickup frame
-        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone))
-
-        # Activate gripper
-        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 1))
-
-        # Slide to measure wood before cutting
-        self.send(MoveToFrame(measure_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
-
-        # Stop to allow human to Cut the Wood
-        self.stop_to_cut()
-
-        # Move to just above measure frame
-        self.send(MoveToFrame(above_measure_frame, travel_speed, travel_zone))
-
-
-        #### MOVE TO SAFE POINTS
-
-        # Set Workobject to World Object 0
-        self.send(compas_rrc.SetWorkObject(WOBJ))
-
-         # First Safe_b1 point
-        self.send(MoveToFrame(safeb1_frame, travel_speed, travel_zone))
-
-         # Second Safe_b2 point
-        self.send_and_wait(MoveToFrame(safeb2_frame, travel_speed, travel_zone))
-
-
-        #### Move TO LATTICE MAKING STATION
-
-        # Set Workobject to lattice making slice
-        self.send(compas_rrc.SetWorkObject(WOBJ_LT))
-
-        # Move to just above place frame
-        self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
-
-        # Move to place frame
-        self.send(MoveToFrame(place_frame, precise_speed, precise_zone))
-
-        # Stop to allow human to nail the Wood
-        self.stop_to_nail()
-
-        # Release gripper
-        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
-
-        # Move to just above place frame
-        self.send_and_wait(MoveToFrame(above_place_frame, travel_speed, travel_zone))
-        # self.send_and_wait(MoveToFrame(safe_frame, travel_speed, travel_zone))
-        
-
-        # RETURN TO SAVE POINT
-        # This command is sent with send_and_wait, to make the client send one
-        # pick and place instruction at a time.
-        #self.send_and_wait(MoveToFrame(safe_frame, travel_speed, travel_zone))
-
-
     def slice_making(
         self,
         pick_framelike,
@@ -362,6 +262,11 @@ class RobotClient(compas_rrc.AbbClient):
         place_slice_frame = ensure_frame(place_slice_framelike)
 
         above_pick_slice_frame = offset_frame(pick_slice_frame, -offset_distance)
+<<<<<<< Updated upstream
+=======
+
+        #### MOVEMENT AT THE SLICE MAKING STATION
+>>>>>>> Stashed changes
 
         #### MOVE TO SAFE2 POINT
         self.send_and_wait(MoveToFrame(safe2_frame, travel_speed, travel_zone))
@@ -400,128 +305,17 @@ class RobotClient(compas_rrc.AbbClient):
         # Release gripper
         self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
 
+<<<<<<< Updated upstream
+=======
+        # Set Workobject to Slice Making Station
+        self.send(compas_rrc.SetWorkObject(WOBJ_SL))
+
+>>>>>>> Stashed changes
         # move to rotated_safe2 plane
         self.send_and_wait(MoveToFrame(rotated_safe2_frame, travel_speed, travel_zone, motion_type=motion_type_precise))
 
 
     ####
-
-    def cap_making(
-        self,
-        pick_framelike,
-        measure_framelike,
-        safe_framelike,
-        place_framelike,
-        # travel_speed=250,
-        travel_speed=1000,
-        travel_zone=Zone.Z10,
-        precise_speed=50,
-        precise_zone=Zone.FINE,
-        offset_distance=150,
-        motion_type_travel=Motion.JOINT,
-        motion_type_precise=Motion.LINEAR,
-    ):
-        pick_frame = ensure_frame(pick_framelike)
-        measure_frame = ensure_frame(measure_framelike)
-        safe_frame = ensure_frame(safe_framelike)
-        place_frame = ensure_frame(place_framelike)
-
-        above_pick_frame = offset_frame(pick_frame, -offset_distance)
-        above_measure_frame = offset_frame(measure_frame, -offset_distance)
-        above_place_frame = offset_frame(place_frame, -offset_distance)
-
-        #### MOVE TO SAFE POINT
-
-        # Set Workobject to World Object 0
-        self.send(compas_rrc.SetWorkObject(WOBJ))
-
-        # Move to Safepoint 
-        self.send(MoveToFrame(safe_frame, travel_speed, travel_zone, motion_type=motion_type_precise))
-
-
-        #### Move to CUTTING STATION
-
-        # Set Workobject to Cutting Station
-        self.send(compas_rrc.SetWorkObject(WOBJ_CT))
-
-        # Move to just above pickup frame
-        self.send_and_wait(MoveToFrame(above_pick_frame, travel_speed, travel_zone))
-
-        # Move to pickup frame
-        self.send(MoveToFrame(pick_frame, precise_speed, precise_zone))
-
-        # Activate gripper
-        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 1))
-
-        # Slide to measure wood before cutting
-        self.send(MoveToFrame(measure_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
-
-        # Stop to allow human to Cut the Wood
-        self.stop_to_cut()
-
-        # Move to just above measure frame
-        self.send(MoveToFrame(above_measure_frame, travel_speed, travel_zone))
-
-
-        #### MOVE TO SAFE POINT
-
-        # Set Workobject to World Object 0
-        self.send(compas_rrc.SetWorkObject(WOBJ))
-
-         # Safe point
-        self.send(MoveToFrame(safe_frame, travel_speed, travel_zone))
-
-
-        #### Move TO SLICE MAKING STATION
-
-        # Set Workobject to slice making slice
-        self.send(compas_rrc.SetWorkObject(WOBJ_SL))
-
-        # Move to just above place frame
-        self.send(MoveToFrame(above_place_frame, travel_speed, travel_zone))
-
-        # Move to place frame
-        self.send(MoveToFrame(place_frame, precise_speed, precise_zone))
-
-        # Stop to allow human to nail the Wood
-        self.stop_to_nail()
-
-        # Release gripper
-        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
-
-        # Move to just above place frame
-        self.send_and_wait(MoveToFrame(above_place_frame, travel_speed, travel_zone))
-        # self.send_and_wait(MoveToFrame(safe_frame, travel_speed, travel_zone))
-        
-
-        # RETURN TO SAVE POINT
-        # This command is sent with send_and_wait, to make the client send one
-        # pick and place instruction at a time.
-        #self.send_and_wait(MoveToFrame(safe_frame, travel_speed, travel_zone))
-
-    ####
-
-    def point_go(
-        self,
-        pick_framelike,
-        place_framelike,
-        travel_speed=250,
-        travel_zone=Zone.Z10,
-        precise_speed=50,
-        precise_zone=Zone.FINE,
-        offset_distance=150,
-        motion_type_travel=Motion.JOINT,
-        motion_type_precise=Motion.LINEAR,
-    ):
-        pick_frame = ensure_frame(pick_framelike)
-
-        # PICK
-
-        # Move to pickup frame
-        self.send_and_wait(MoveToFrame(pick_frame, precise_speed, precise_zone, motion_type=motion_type_precise))
-
-        # Stop to measure
-        self.stop_to_measure()
 
     def marking(
         self,
@@ -572,6 +366,21 @@ class RobotClient(compas_rrc.AbbClient):
         # Set Workobject to Lattice Station
         self.send(compas_rrc.SetWorkObject(WOBJ_LT))
 
+<<<<<<< Updated upstream
+=======
+        # Open gripper
+        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 0))
+
+        # Stop to measure
+        self.stop_to_nail()
+        
+        # Move to frame
+        self.send_and_wait(MoveToFrame(rolling_frame, precise_speed, precise_zone,motion_type_precise))
+
+        # Close gripper
+        self.send(compas_rrc.SetDigital(GRIPPER_PIN, 1))
+
+>>>>>>> Stashed changes
         # Move to frame
         self.send_and_wait(MoveToFrame(rolling_frame, precise_speed, precise_zone,motion_type_precise))
 
