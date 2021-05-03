@@ -23,7 +23,7 @@ def run_rolling(file_path):
                 travel_zone=Zone.Z10,
                 precise_speed=100,
                 precise_zone=Zone.FINE,
-                offset_distance=150,
+                offset_distance=4,
             )
         client.post()
 
