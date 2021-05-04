@@ -14,8 +14,7 @@ def run_rolling(file_path):
 
 
     with RobotClient() as client:
-        client.pre()
-
+        # client.pre()
         client.pre_rolling()
 
         for rolling, saferight in zip(data["rolling_frames"], data["saferight_frames"]):
@@ -28,7 +27,8 @@ def run_rolling(file_path):
                 precise_zone=Zone.FINE,
                 offset_distance=15,
             )
-        client.post()
+        # client.post()
+        client.post_rolling()
 
 
 if __name__ == "__main__":
