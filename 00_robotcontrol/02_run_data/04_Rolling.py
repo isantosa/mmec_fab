@@ -12,10 +12,11 @@ def run_rolling(file_path):
 
     data = json_load(file_path)
 
+
     with RobotClient() as client:
         client.pre()
 
-        # client.pre_Rolling()
+        client.pre_rolling()
 
         for rolling, saferight in zip(data["rolling_frames"], data["saferight_frames"]):
             client.rolling(
@@ -25,7 +26,7 @@ def run_rolling(file_path):
                 travel_zone=Zone.Z10,
                 precise_speed=100,
                 precise_zone=Zone.FINE,
-                offset_distance=4,
+                offset_distance=15,
             )
         client.post()
 
@@ -38,7 +39,7 @@ if __name__ == "__main__":
         filepath = "02_slice_placing_aa-010.json"
     else:
         print("No input file specified, using example file pp_frames.json")
-        filepath = os.path.abspath(os.path.join(__file__, "..", "04_Rolling_right.json"))
-        # filepath = os.path.abspath(os.path.join(__file__, "..", "04_Rolling_left.json"))
+        # filepath = os.path.abspath(os.path.join(__file__, "..", "04_Rolling_right.json"))
+        filepath = os.path.abspath(os.path.join(__file__, "..", "04_Rolling_left.json"))
 
     run_rolling(filepath)
