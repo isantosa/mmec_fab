@@ -14,6 +14,10 @@ def run_rolling(file_path):
 
     with RobotClient() as client:
         client.pre()
+<<<<<<< Updated upstream
+=======
+        # client.preroll()
+>>>>>>> Stashed changes
 
         for rolling, saferight in zip(data["rolling_frames"], data["saferight_frames"]):
             client.rolling(
@@ -23,9 +27,16 @@ def run_rolling(file_path):
                 travel_zone=Zone.Z10,
                 precise_speed=100,
                 precise_zone=Zone.FINE,
+<<<<<<< Updated upstream
                 offset_distance=150,
             )
         client.post()
+=======
+                offset_distance=7,
+            )
+        client.post()
+        # client.postroll()
+>>>>>>> Stashed changes
 
 
 if __name__ == "__main__":

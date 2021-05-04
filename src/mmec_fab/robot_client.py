@@ -18,6 +18,7 @@ SPEED_OVERRIDE = 100  # %
 TCP_MAX_SPEED = 250  # mm/s
 
 SAFE_JOINT_POSITION = [0, 0, 0, 0, 90, 0]  # six values in degrees
+SAFE_ROLL_POSITION = [90, 0, 0, 0, 90, 0]  # six values in degrees
 
 TIMEOUT_SHORT = 10
 TIMEOUT_LONG = 30
@@ -94,6 +95,41 @@ class RobotClient(compas_rrc.AbbClient):
         self.send_and_wait(
             MoveToJoints(SAFE_JOINT_POSITION, self.EXTERNAL_AXES_DUMMY, 150, 50)
         )
+<<<<<<< Updated upstream
+=======
+        self.send(compas_rrc.PrintText("Finish Production"))
+
+
+    def preroll(self, safe_roll_position=[90, 0, 0, 0, 90, 0]):
+        self.check_connection_controller()
+        # Open gripper
+        self.send(compas_rrc.SetDigital(GRIPPER_PIN, False))
+
+        # Set speed and accceleration
+        self.send(compas_rrc.SetAcceleration(ACCEL, ACCEL_RAMP))
+        self.send(compas_rrc.SetMaxSpeed(SPEED_OVERRIDE, TCP_MAX_SPEED))
+
+        # Set tool and workobject
+        # self.send(compas_rrc.SetTool(TOOL))
+        self.send(compas_rrc.SetTool(TOOL_MMW))
+        self.send(compas_rrc.SetWorkObject(WOBJ))
+
+        self.confirm_start()
+
+        self.send_and_wait(
+            MoveToJoints(SAFE_JOINT_POSITION, self.EXTERNAL_AXES_DUMMY, 150, 50)
+        )
+        self.send(compas_rrc.PrintText("Start Production"))
+
+
+    def postroll(self, safe_roll_position=[90, 0, 0, 0, 90, 0]):
+        self.send_and_wait(
+            MoveToJoints(SAFE_JOINT_POSITION, self.EXTERNAL_AXES_DUMMY, 150, 50)
+        )
+        self.send(compas_rrc.PrintText("Finish Production"))
+
+
+>>>>>>> Stashed changes
 
     def pick_place(
         self,
