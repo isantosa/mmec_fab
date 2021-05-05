@@ -25,7 +25,7 @@ def run_making_placing(file_path):
                 travel_zone=Zone.Z10,
                 precise_speed=100,
                 precise_zone=Zone.FINE,
-                offset_distance=4,
+                offset_distance=150,
             )
         for pick_slice, safe2, rotated_safe2, place_offset, place_slice in zip(data["pick_slice_frames"], data["safe2_frames"], data["rotated_safe2_frames"], data["place_offset_frames"], data["place_slice_frames"]):
             client.slice_placing(
@@ -53,6 +53,6 @@ if __name__ == "__main__":
         filepath = "C:/Users/indra/repos/mmec_fab/00_robotcontrol/02_run_data/01_slice_making/slice_making_aa-01-01.json"
     else:
         # print("No input file specified, using example file pp_frames.json")
-        filepath = os.path.abspath(os.path.join(__file__, "..", "02_making_placing_aa-01-08.json"))
+        filepath = os.path.abspath(os.path.join(__file__, "..", "02_making_placing_aa-01-04.json"))
 
     run_making_placing(filepath)
