@@ -1,0 +1,13 @@
+
+
+rcf -c real fab filename
+rcf -c real goto  # go to position
+rcf -c real record# record poses for localization
+rcf proxy # start proxy for arbitrary pts
+rcf install # install to rhino
+
+
+\\nas22.ethz.ch
+set ROBOT_IP=192.168.125.1 && docker-compose -f  "C:\Users\seminarwoche\Documents\GIT\rapid_clay_formations_fab\src\rapid_clay_formations_fab\_compose_files\abb-driver\docker-compose.yml" up -d
+
+1JJ

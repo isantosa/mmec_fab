@@ -1,0 +1,144 @@
+MODULE RFL_GlobalData(SYSMODULE)
+    !***********************************************************************************
+    !
+    ! ETH Zurich / NCCR Digital Fabrication
+    ! HIP CO 11.1 / Gustave-Naville-Weg 1
+    ! CH-8093 Zürich
+    !
+    !***********************************************************************************
+    !
+    ! PROJECT     :  A011_RFL
+    !
+    ! FUNCTION    :  Includ all Global Data's for RFL control
+    !
+    ! AUTHOR      :  Philippe Fleischmann
+    !
+    ! EMAIL       :  fleischmann@arch.ethz.ch
+    !
+    ! HISTORY     :  2019.06.19 Draft
+    !
+    ! Copyright   :  ETH Zürich (CH) 2016
+    !
+    !***********************************************************************************
+
+    !************************************************
+    ! Declaration :     bool
+    !************************************************
+    !
+    PERS bool b_RFL_WaitForJob;
+
+    !************************************************
+    ! Declaration :     num
+    !************************************************
+    !
+    ! Values used for VelSet
+    PERS num n_RFL_MaxTCP;
+    PERS num n_RFL_Override;
+    !
+    ! Timer
+    PERS num n_RFL_TimeTaskLiAll;
+    PERS num n_RFL_TimeTPMsg;
+    PERS num n_RFL_TimUserReaction;
+
+    !************************************************
+    ! Declaration :     string
+    !************************************************
+    !
+    PERS string st_RFL_JobFrmMa;
+    PERS string st_RFL_CurMaJob;
+
+    !************************************************
+    ! Declaration :     string {array}
+    !************************************************
+    !
+    PERS string st_RFL_BtnRobTasks{5};
+
+    !************************************************
+    ! Declaration :     speeddata
+    !************************************************
+    !
+    PERS speeddata v_RFL_SysHMin;
+    PERS speeddata v_RFL_SysHMed;
+    PERS speeddata v_RFL_SysHMax;
+    !
+    PERS speeddata v_RFL_Min;
+    PERS speeddata v_RFL_Med;
+    PERS speeddata v_RFL_Max;
+    !
+    ! For Safe position
+    PERS speeddata v_RFL_SafePosMin;
+    PERS speeddata v_RFL_SafePosMed;
+    PERS speeddata v_RFL_SafePosMax;
+    !
+    PERS speeddata v_RFL_RestorPos;
+    !
+    PERS speeddata v_RFL_RefPointMin;
+    PERS speeddata v_RFL_RefPointMed;
+    PERS speeddata v_RFL_RefPointMax;
+
+    !************************************************
+    ! Declaration :     zonedata
+    !************************************************
+    !
+    PERS zonedata z_RFL_MaMin;
+    PERS zonedata z_RFL_MaMed;
+    PERS zonedata z_RFL_MaMax;
+
+    !************************************************
+    ! Declaration :     tasklist
+    !************************************************
+    !
+    PERS tasks tl_RFL_Empty{7};
+    !
+    PERS tasks tl_RFL_All{7};
+    PERS tasks tl_RFL_MaRob{7};
+    PERS tasks tl_RFL_Rob{7};
+    !
+    PERS tasks tl_RFL_MaRecSen{7};
+
+    !************************************************
+    ! Declaration :     syncident
+    !************************************************
+    !
+    VAR syncident id_ABB_ExampleSta;
+    VAR syncident id_ABB_ExampleEnd;
+    !
+    VAR syncident id_ABB_CraneSta;
+    VAR syncident id_ABB_CraneEnd;
+    ! 
+    VAR syncident id_ABB_CalibPosSta;
+    VAR syncident id_ABB_CalibPosEnd;
+    !
+    VAR syncident id_ABB_BrakeCheckStart;
+    VAR syncident id_ABB_BrakeCheckInPos;
+    VAR syncident id_ABB_BrakeCheckDone;
+    VAR syncident id_ABB_BrakeCheckEnd;
+    !
+    VAR syncident id_RFL_MaInitDone;
+    !
+    VAR syncident id_RFL_InitTaskSta;
+    VAR syncident id_RFL_InitTaskEnd;
+    !
+    VAR syncident id_RFL_InitVarSta;
+    VAR syncident id_RFL_InitVarEnd;
+    !
+    VAR syncident id_RFL_InitSigSta;
+    VAR syncident id_RFL_InitSigEnd;
+    !
+    VAR syncident id_RFL_InitSpeedSta;
+    VAR syncident id_RFL_InitSpeedSet;
+    VAR syncident id_RFL_InitSpeedEnd;
+    !
+    VAR syncident id_RFL_ExeJobFrmMaSta;
+    VAR syncident id_RFL_ExeJobFrmMaEnd;
+    !
+    VAR syncident id_RFL_SysHSta;
+    VAR syncident id_RFL_SysHEnd;
+
+    !************************************************
+    ! Declaration :     listitem
+    !************************************************
+    !
+    PERS listitem li_RFL_AllAxes{9};
+
+ENDMODULE

@@ -1,0 +1,106 @@
+MODULE RFL_SpeedLimit_Ma(SYSMODULE)
+    !***********************************************************************************
+    !
+    ! ETH Zürich / Robotic Fabrication Lab
+    ! HIB C 13 / Stefano-Franscini-Platz 1
+    ! CH-8093 Zürich
+    !
+    !***********************************************************************************
+    !
+    ! PROJECT     :  A011_RFL
+    !
+    ! FUNCTION    :  Record new data types for RFL and DFAB
+    !
+    ! AUTHOR      :  Philippe Fleischmann
+    !
+    ! EMAIL       :  fleischmann@arch.ethz.ch
+    !
+    ! HISTORY     :  2018.02.19 Draft
+    !
+    ! Copyright   :  ETH Zürich (CH) 2018
+    !
+    !***********************************************************************************
+
+    !************************************************
+    ! Record : speedlimdata   
+    !************************************************
+    !
+    RECORD speedlimdata
+        num tcpspeed;
+        num rax_1;
+        num rax_2;
+        num rax_3;
+        num rax_4;
+        num rax_5;
+        num rax_6;
+        num eax_a;
+        num eax_b;
+        num eax_c;
+        num eax_d;
+        num eax_e;
+        num eax_f;
+    ENDRECORD
+
+    !************************************************
+    ! Declaration :     speedlimdata
+    !************************************************
+    !
+    PERS speedlimdata slim_RFL_Master:=[300,60,0,0,30,30,30,100,125,150,0,0,48.3481];
+    PERS speedlimdata slim_RFL_PathPlan:=[250,60,0,0,15,15,15,100,200,200,0,0,0];
+    PERS speedlimdata slim_RFL_CurrentProject:=[245,16,39,43,43,36,43,0,0,0,0,0,0];
+    !
+    ! Projects
+    PERS speedlimdata slim_A009_Master:=[500,60,0,0,45,45,45,300,300,300,0,0,0];
+    PERS speedlimdata slim_A032_Master:=[500,60,0,0,45,45,45,300,300,300,0,0,0];
+
+    !************************************************
+    ! Function    :     Speed Limit on 
+    ! Programmer  :     Philippe Fleischmann
+    ! Date        :     2018.02.21
+    !***************** ETH Zürich *******************
+    !
+    PROC r_RFL_SpeedLimitOn()
+        !
+        ! Activate speed limit
+        SetDo\Sync, doMaSpLiAct,1;
+        !
+        ! Safety time
+        WaitTime 0.5;
+        !
+        ! Wait until speed limit is active
+        !* WaitDi diMaActSpLi,1\Visualize\Header:="Master"\Message:="Wait until Signal Speed Limit is activ (diMaActSpLi=1)"\Icon:=iconInfo;
+        !
+        ! Log prozedure
+        r_RFL_LogMsg "Speed Limit","On, done";
+        RETURN ;
+    ERROR
+        ! Placeholder for Error Code...
+    ENDPROC
+
+    !************************************************
+    ! Function    :     Speed Limit off
+    ! Programmer  :     Philippe Fleischmann
+    ! Date        :     2018.02.21
+    !***************** ETH Zürich *******************
+    !
+    PROC r_RFL_SpeedLimitOff()
+        !
+        ! Activate speed limit
+        SetDo\Sync,doMaSpLiAct,0;
+        !
+        ! Safety time
+        WaitTime 0.5;
+        !
+        ! Wait until speed limit is active
+        !* WaitDi diMaActSpLi,0\Visualize\Header:="Master"\Message:="Wait until Signal Speed Limit is deactiv (diViMaActSpLi=0)"\Icon:=iconInfo;
+        WaitDi diMaActSpLi,0;
+        !
+        ! Log prozedure
+        r_RFL_LogMsg "Speed Limit","Off, done";
+        RETURN ;
+    ERROR
+        ! Placeholder for Error Code...
+    ENDPROC
+
+
+ENDMODULE

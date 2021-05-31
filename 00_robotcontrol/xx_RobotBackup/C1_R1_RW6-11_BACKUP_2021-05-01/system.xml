@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SystemProperties>
+  <SystemName>C1_R1_RW6-11</SystemName>
+  <SerialNo>46-65480</SerialNo>
+  <UsedMedia>
+    <Media path="RobotWare_6.11.2019" name="RobotWare" version="6.11.2019">
+    </Media>
+  </UsedMedia>
+  <ControlModule>
+    <Option descr="UDPUC Driver">
+    </Option>
+    <Option descr="English">
+    </Option>
+    <Option descr="613-1 Collision Detection">
+    </Option>
+    <Option descr="689-1 Externally Guided Motion (EGM)">
+    </Option>
+    <Option descr="614-1 FTP SFTP and NFS client">
+    </Option>
+    <Option descr="976-1 T10 Jogging Device">
+    </Option>
+    <Option descr="623-1 Multitasking">
+    </Option>
+    <Option descr="616-1 PC Interface">
+    </Option>
+    <Option descr="888-2 PROFINET Controller/Device">
+    </Option>
+    <Option descr="1125-2 SafeMove Pro">
+    </Option>
+    <Option descr="996-1 Safety Module">
+    </Option>
+    <Option descr="608-1 World Zones">
+    </Option>
+    <Option descr="RobotWare Base">
+    </Option>
+  </ControlModule>
+  <DriveModule>
+    <Name>Robot1</Name>
+    <Option descr="Axis Calibration">
+    </Option>
+    <Option descr="Drive System IRB 460/640/660/760/4600/66xx/6700">
+    </Option>
+    <Option descr="IRB 4600-40/2.55 Type B">
+    </Option>
+  </DriveModule>
+</SystemProperties>

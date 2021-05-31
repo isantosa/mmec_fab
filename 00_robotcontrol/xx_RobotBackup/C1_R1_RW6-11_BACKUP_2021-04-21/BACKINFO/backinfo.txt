@@ -1,0 +1,141 @@
+#
+# Generated backup file, do not edit.
+#
+# Originally at: /hd0a/TEMP/backup.053127
+# 2021-04-21  11:59:46
+#
+>>SYSTEM_ID:
+46-65480
+
+>>PRODUCTS_ID:
+RobotWare Version: 6.11.02.00
+
+  UDPUC Driver
+  English
+  613-1 Collision Detection
+  689-1 Externally Guided Motion (EGM)
+  614-1 FTP SFTP and NFS client
+  976-1 T10 Jogging Device
+  623-1 Multitasking
+  616-1 PC Interface
+  888-2 PROFINET Controller/Device
+  1125-2 SafeMove Pro
+  996-1 Safety Module
+  608-1 World Zones
+  RobotWare Base
+  Axis Calibration
+  Drive System IRB 460/640/660/760/4600/66xx/6700
+  IRB 4600-40/2.55 Type B
+
+>>HOME:
+All public files and directories
+
+>>SYSPAR:
+SYS.cfg
+PROC.cfg
+MMC.cfg
+EIO.cfg
+SIO.cfg
+MOC.cfg
+
+
+>>TASK1: (T_ROB1,,)
+SYSMOD/RFL_TaskData_1.sys @ 
+PROGMOD/RFL_Helper_1.mod @ 
+PROGMOD/RFL_Control_1.mod @ 
+SYSMOD/user.sys @ 
+PROGMOD/A057_Instructions_Rob.mod @ 
+PROGMOD/A042_UserInteraction_Rob.mod @ 
+PROGMOD/A042_Helper_Rob.mod @ 
+PROGMOD/A042_DataTask_Rob.mod @ 
+PROGMOD/A042_Control_Rob.mod @ 
+PROGMOD/A042_Base_Utilities_Rob.mod @ 
+PROGMOD/A042_Base_Instructions_Rob.mod @ 
+PROGMOD/A042_Base_Feedback_Rob.mod @ 
+PROGMOD/A042_Base_DataTask_Rob.mod @ 
+PROGMOD/A057_DataGlobal.mod @ 
+PROGMOD/A042_DataGlobal.mod @ 
+SYSMOD/RFL_GlobalData.sys @ 
+SYSMOD/LINKEDM.sys @ 
+SYSMOD/Safety.sys @ 
+SYSMOD/RFL_SpeedLimit.sys @ 
+PROGMOD/A042_DataRecord.mod @ 
+PROGMOD/A057_DataTask_1.mod @ 
+PROGMOD/A057_Control_1.mod @ 
+
+>>TASK2: (SC_CBC,,)
+SYSMOD/user.sys @ 
+
+>>TASK3: (RECEIVER,,)
+SYSMOD/user.sys @ 
+PROGMOD/A042_UserInteraction.mod @ 
+PROGMOD/A057_DataGlobal.mod @ 
+PROGMOD/A042_DataGlobal.mod @ 
+SYSMOD/RFL_GlobalData.sys @ 
+PROGMOD/A042_LogTest.mod @ 
+SYSMOD/RFL_TaskData_Rec.sys @ 
+PROGMOD/RFL_Control_Rec.mod @ 
+PROGMOD/A042_License.mod @ 
+SYSMOD/RFL_SpeedLimit.sys @ 
+PROGMOD/A042_DataRecord.mod @ 
+PROGMOD/A057_DataTask_Rec.mod @ 
+PROGMOD/A057_Control_Rec.mod @ 
+PROGMOD/A042_Receiver_Rec.mod @ 
+PROGMOD/A042_Log_Rec.mod @ 
+PROGMOD/A042_DataTask_Rec.mod @ 
+PROGMOD/A042_Control_Rec.mod @ 
+
+>>TASK4: (SENDER,,)
+SYSMOD/user.sys @ 
+PROGMOD/A042_UserInteraction.mod @ 
+PROGMOD/A057_DataGlobal.mod @ 
+PROGMOD/A042_DataGlobal.mod @ 
+SYSMOD/RFL_GlobalData.sys @ 
+PROGMOD/A057_DataTask_Sen.mod @ 
+PROGMOD/A057_Control_Sen.mod @ 
+PROGMOD/A042_Sender_Sen.mod @ 
+PROGMOD/A042_DataTask_Sen.mod @ 
+PROGMOD/A042_Control_Sen.mod @ 
+PROGMOD/A042_License.mod @ 
+PROGMOD/RFL_Helper_Sen.mod @ 
+PROGMOD/RFL_Control_Sen.mod @ 
+SYSMOD/RFL_TaskData_Sen.sys @ 
+SYSMOD/RFL_SpeedLimit.sys @ 
+PROGMOD/A042_DataRecord.mod @ 
+
+>>TASK5: (T_MASTER,,)
+PROGMOD/A042_EULA.mod @ 
+PROGMOD/RFL_Helper_M.mod @ 
+SYSMOD/user.sys @ 
+PROGMOD/A042_UserInteraction.mod @ 
+SYSMOD/C1_R1_SysSpec_Ma.sys @ 
+PROGMOD/A057_DataGlobal_Ma.mod @ 
+PROGMOD/A057_DataTask_Ma.mod @ 
+PROGMOD/A057_Control_Ma.mod @ 
+PROGMOD/A057_A042_Confic_Ma.mod @ 
+PROGMOD/A052_DataGlobal_Ma.mod @ 
+PROGMOD/A042_Helper_Ma.mod @ 
+PROGMOD/A042_DataTask_Ma.mod @ 
+PROGMOD/A042_DataGlobal_Ma.mod @ 
+PROGMOD/A042_Control_Ma.mod @ 
+PROGMOD/A042_Confic_Ma.mod @ 
+PROGMOD/A042_Base_Instructions_Ma.mod @ 
+PROGMOD/A042_Base_Feedback_Ma.mod @ 
+PROGMOD/A052_Control.mod @ 
+PROGMOD/A042_DataRecord.mod @ 
+SYSMOD/RFL_SpeedLimit_Ma.sys @ 
+SYSMOD/RFL_TaskData_Ma.sys @ 
+SYSMOD/RFL_GlobalData_Ma.sys @ 
+PROGMOD/RFL_Job_Ma.mod @ 
+PROGMOD/RFL_HMI_Ma.mod @ 
+PROGMOD/RFL_Events_Ma.mod @ 
+PROGMOD/RFL_Control_Ma.mod @ 
+
+>>TASK6: (T_Beefer,,)
+SYSMOD/user.sys @ 
+PROGMOD/A052_DataTask.mod @ 
+PROGMOD/A052_DataGlobal.mod @ 
+PROGMOD/A052_Control.mod @ 
+
+
+>>EOF:
